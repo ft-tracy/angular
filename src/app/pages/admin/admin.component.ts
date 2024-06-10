@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MenuItem } from 'primeng/api';
+import { SidebarModule } from 'primeng/sidebar';
+
 
 @Component({
   selector: 'app-admin',
@@ -8,28 +11,3 @@ import { Component } from '@angular/core';
 export class AdminComponent {
 
 }
-
-
-// import { Component, ViewChild } from '@angular/core';
-// import { SidebarModule } from 'primeng/sidebar';
-// import { ButtonModule } from 'primeng/button';
-// import { RippleModule } from 'primeng/ripple';
-// import { AvatarModule } from 'primeng/avatar';
-// import { StyleClassModule } from 'primeng/styleclass';
-// import { Sidebar } from 'primeng/sidebar';
-
-// @Component({
-//     selector: 'sidebar-headless-demo',
-//     templateUrl: './sidebar-headless-demo.html',
-//     standalone: true,
-//     imports: [SidebarModule, ButtonModule, RippleModule, AvatarModule, StyleClassModule]
-// })
-// export class SidebarHeadlessDemo {
-//     @ViewChild('sidebarRef') sidebarRef!: Sidebar;
-
-//     closeCallback(e): void {
-//         this.sidebarRef.close(e);
-//     }
-
-//     sidebarVisible: boolean = false;
-// }

@@ -44,7 +44,7 @@ export class ResetPasswordComponent {
       const NewPassword = this.resetPasswordForm.value.NewPassword || '';
       const ConfirmPassword = this.resetPasswordForm.value.ConfirmPassword || '';
     
-      this.authService.resetPassword(email, NewPassword, ConfirmPassword, "api/account/resetpassword").subscribe(response => {
+      this.authService.resetPassword(email, NewPassword, ConfirmPassword, "api/Account/ResetPassword").subscribe(response => {
         
           if (response.message === "Password reset successful."){
             this.router.navigate(['/login']);
@@ -52,9 +52,7 @@ export class ResetPasswordComponent {
             console.log("Reset Password error");
 
 }
-        
-
-      }
+  }
     )
     
     

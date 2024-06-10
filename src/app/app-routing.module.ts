@@ -6,6 +6,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ContentManagerComponent } from './pages/content-manager/content-manager.component';
 import { authGuard } from './guards/auth.guard';
+import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
+// import { };
 
 const routes: Routes = [
   {
@@ -34,7 +36,11 @@ const routes: Routes = [
     path: 'content-manager',
     component: ContentManagerComponent,
     // canActivate: [authGuard],
-  }
+  },
+  {
+    path: 'sidebar',
+    component: SidebarComponent,
+  },
 ];
 
 @NgModule({

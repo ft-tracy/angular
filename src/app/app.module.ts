@@ -17,6 +17,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ContentManagerComponent } from './pages/content-manager/content-manager.component';
 
+//admin dashboard
+import { SidebarModule } from 'primeng/sidebar';
+import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
+import { MenuModule } from 'primeng/menu';
+import { BadgeModule } from 'primeng/badge';
+import { RippleModule } from 'primeng/ripple';
+import { AvatarModule } from 'primeng/avatar';
+
 
 
 @NgModule({
@@ -26,7 +34,9 @@ import { ContentManagerComponent } from './pages/content-manager/content-manager
     LoginComponent,
     ResetPasswordComponent,
     AdminComponent,
-    ContentManagerComponent
+    ContentManagerComponent,
+    SidebarComponent,
+    // AppLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +47,12 @@ import { ContentManagerComponent } from './pages/content-manager/content-manager
     ReactiveFormsModule,
    CardModule,
    HttpClientModule,
+
+   MenuModule, 
+   BadgeModule, 
+   RippleModule, 
+   AvatarModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

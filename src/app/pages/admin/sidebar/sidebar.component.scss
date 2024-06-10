@@ -1,0 +1,131 @@
+@import "primeicons/primeicons.css";
+
+//Globals
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family:Arial, Helvetica, sans-serif;
+    user-select: none;
+    
+}
+
+body {
+    height: 100vh;
+   
+}
+
+//responsive
+@mixin mobile {
+    @media screen and (max-width: 768px){
+        @content;
+
+    }
+    
+}
+
+//sidebar
+.sidebar container {
+    width: 300px;
+    height: 100%;
+    margin-left: 600px;
+   
+    background: rgba(16, 8, 24);
+    @include mobile {
+        width : 60 px;
+    }
+    &__header {
+        display: flex;
+        padding: 20px 25px;
+        background: rgb(55, 39, 71);
+        gap: 15px;
+        &__logo {
+            margin: 1000px;
+            color: white;
+        }
+        &__brand i {
+            color: white;
+            @include mobile{
+                display: none;
+            }
+        }
+        
+    }
+}
+
+//sidebar list
+.sidebar-container {
+    &__list {
+        color: white;
+        margin-top: 10px;
+        &__item {
+            cursor: pointer;
+            padding: 15px 20px;
+            display: flex;
+            gap: 15px;
+            color: rgba(255, 255, 255, 0.699);
+            transition: all 0.3s ease;
+            &__title{
+                @include mobile {
+                    display: none;
+                }
+            }
+        }
+        &__item:hover{
+            color: white;
+            background: rgba(45, 30, 61);
+        }
+    }
+
+}
+
+//sidebar footer
+.sidebar-container{
+    position: relative;
+    &__footer{
+        // margin: -140px;
+        // width: 300px;
+       
+        @include mobile {
+            display: none;
+        }
+        cursor: pointer;
+    
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        margin-bottom: -90px;
+
+        background-color: rgba(45, 30, 61);
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        gap: 15px;
+        &__logo{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            // background: url("");
+            background-size: cover  ;
+            background-position: center;
+        }
+        &__data{
+            &__title{
+                font-weight: 500 ;
+                color: white;
+            }
+            &__subtitle{
+                font-weight: 350 ;
+                color: white;
+                font-size: 12px;
+            }
+        }
+    }
+
+}
+
+
+
+

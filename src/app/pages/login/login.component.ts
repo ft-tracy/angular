@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -34,7 +35,7 @@ export class LoginComponent {
       const password = this.loginForm.value.password || '';
 
       
-      this.authService.login(email, password, "/api/account/login").subscribe(response => {
+      this.authService.login(email, password, "/api/Account/Login").subscribe(response => {
         if (response) {
 
           if(this.authService.isFirstLogin())
