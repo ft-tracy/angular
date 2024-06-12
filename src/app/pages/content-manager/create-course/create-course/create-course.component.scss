@@ -1,0 +1,129 @@
+// styles.scss
+
+// Define color variables
+$primary-color: #001f3f; // Navy Blue
+$accent-color: #ff6600; // Burnt Orange
+$background-color: #a7a7bb;
+$input-border-color: #ccc;
+$input-focus-border-color: $primary-color;
+$label-color: #001f3f ;
+$text-color: #ffffff; // Black for visibility
+
+form {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: $background-color;
+  border: 1px solid $input-border-color;
+  border-radius: 5px;
+
+  .header {
+    background-color: $primary-color;
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    margin-bottom: 20px;
+
+    h3 {
+      margin: 0;
+    }
+  }
+
+  .p-field {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: $label-color;
+      font-weight: bold;
+    }
+
+    
+    .custom-checkbox {
+        .p-checkbox-label {
+          color: $primary-color !important;  // Navy blue color
+        }
+      }
+
+      .custom-label {
+        color: #000080; // Navy blue color
+        margin-right: 10px; // Adjust spacing as needed
+        font-weight: bold; // Optional: make the label bold
+        vertical-align: middle; // Align with the checkbox
+      }
+        
+      
+
+
+    input[type="file"],
+    input[type="text"],
+    input[type="date"],
+    p-inputtext,
+    p-calendar,
+    p-checkbox {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $input-border-color;
+      border-radius: 3px;
+      outline: none;
+      transition: border-color 0.3s;
+      color: $text-color;
+
+      &:focus {
+        border-color: $input-focus-border-color;
+      }
+    }
+
+    .p-checkbox label {
+      margin-left: 5px;
+      color: black;
+    }
+  }
+
+  .preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+    img {
+      max-width: 100%;
+      max-height: 200px;
+      border: 1px solid $input-border-color;
+      border-radius: 3px;
+    }
+  }
+
+  button{
+    background-color: $accent-color;
+    border: none;
+    padding: 5px 10px;
+    color: #ffffff;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken($accent-color, 10%);
+    }
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    background-color: $primary-color;
+    color: #fff5f5 !important;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: lighten($primary-color, 5%);
+    }
+  }
+}
+

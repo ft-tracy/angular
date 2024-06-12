@@ -1,0 +1,123 @@
+<form [formGroup]="createCourseForm" (ngSubmit)="onSubmit()">
+  <div class="header">
+    <h3>Create Course</h3>
+  </div>
+
+  <div class="p-field">
+    <label for="CourseImage">Course Image:</label>
+    <input type="file" id="CourseImage" (change)="onFileChange($event)">
+    <div class="preview" *ngIf="courseImagePreview">
+      <img [src]="courseImagePreview" alt="Course Image Preview">
+    </div>
+  </div>
+  <br>
+
+  <div class="p-field">
+    <label for="CourseTitle">Course Title:</label>
+    <input type="text" id="CourseTitle" pInputText formControlName="CourseTitle">
+  </div>
+  <br>
+
+  <div class="p-field">
+    <label for="CourseTags">Course Tags:
+      <div *ngFor="let tag of CourseTags.controls; let i = index">
+        <input id="CourseTags" type="text" [formControlName]="i" pInputText>
+      </div>
+      <br>
+      <button  type="button" pButton label="add tag" (click)="addTag('')"></button>
+    </label>
+
+  </div>
+  <br>
+
+  <div class="p-field">
+    <label for="CreatedOn">Created On:</label>
+    <input type="date" id="CreatedOn" formControlName="CreatedOn">
+  </div>
+  <br>
+
+  <div class="p-field-checkbox">
+    
+    <p-checkbox id="ExclusiveToCompanyEmployees" formControlName="ExclusiveToCompanyEmployees" binary="true"></p-checkbox> 
+    <label for="ExclusiveToCompanyEmployees" class="custom-label">Exclusive To Company Employees?</label>
+  </div>
+  <br><br>
+
+  <button type="submit" pButton label="Save Course"></button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
