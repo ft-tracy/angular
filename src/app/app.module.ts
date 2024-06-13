@@ -23,7 +23,7 @@ import { MenuModule } from 'primeng/menu';
 import { BadgeModule } from 'primeng/badge';
 import { RippleModule } from 'primeng/ripple';
 import { AvatarModule } from 'primeng/avatar';
-import { CreateCourseComponent } from './pages/content-manager/create-course/create-course/create-course.component';
+import { CreateCourseComponent } from './pages/content-manager/create-course/create-course.component';
 // import { CourseListComponent } from './pages/content-manager/course-list/course-list.component';
 // import { ContentfulService } from './services/contentful/contentful.service';
 

@@ -7,7 +7,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { ContentManagerComponent } from './pages/content-manager/content-manager.component';
 import { authGuard } from './guards/auth.guard';
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
-import { CreateCourseComponent } from './pages/content-manager/create-course/create-course/create-course.component';
+import { CreateCourseComponent } from './pages/content-manager/create-course/create-course.component';
 // import { };
 
 const routes: Routes = [

@@ -7,6 +7,10 @@ $input-focus-border-color: $primary-color;
 $label-color: #001f3f;
 $text-color: #ffffff; 
 
+// body {
+//   background-color: #ffffff; // Set main background color to white
+// }
+
 form {
   width: 600px;
   margin: 0 auto;
@@ -144,9 +148,19 @@ form {
     display: flex;
     align-items: center;
   }
+  
 
-  .radio-group label {
+ .radio-group label {
     margin-right: 10px;
+    color: $primary-color !important;
+    font-weight: bold;
   }
+
+  .invisible{
+    color: $background-color;
+  }
+  
+ 
+
 }
 

@@ -53,8 +53,12 @@ export class CreateCourseComponent implements OnInit {
     this.CourseModules.push(this.fb.control(module, Validators.required));
   }
 
+  /**
+   * Removes a module from the CourseModules FormArray at the specified index.
+   * @param index - The index of the module to be removed.
+   */
   removeModule(index: number): void {
-    this.CourseModules.removeAt(index);
+      this.CourseModules.removeAt(index);
   }
 
   onFileChange(event: Event): void {
