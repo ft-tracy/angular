@@ -19,14 +19,30 @@
   <br>
 
   <div class="p-field">
-    <label for="CourseTags">Course Tags:
-      <div *ngFor="let tag of CourseTags.controls; let i = index">
-        <input id="CourseTags" type="text" [formControlName]="i" pInputText>
-      </div>
-      <br>
-      <button  type="button" pButton label="add tag" (click)="addTag('')"></button>
-    </label>
+    <label for="CourseDescription">Course Description:</label>
+    <input type="text" id="CourseDescription" pInputText formControlName="CourseDescription">
+  </div>
+  <br>
 
+  <div class="p-field">
+    <label for="CourseTags">Course Tags:</label>
+    <div *ngFor="let tag of CourseTags.controls; let i = index" class="tag">
+      <input type="text" pInputText [formControlName]="i">
+      <span class="remove-icon" (click)="removeTag(i)">X</span>
+    </div>
+    <br>
+    <button type="button" pButton label="Add Tag" (click)="addTag('')"></button>
+  </div>
+  <br>
+
+  <div class="p-field">
+    <label for="CourseModules">Course Modules:</label>
+    <div *ngFor="let module of CourseModules.controls; let i = index" class="module">
+      <input type="text" pInputText [formControlName]="i">
+      <span class="remove-icon" (click)="removeModule(i)">X</span>
+    </div>
+    <br>
+    <button type="button" pButton label="Add Module" (click)="addModule('')"></button>
   </div>
   <br>
 
@@ -36,71 +52,16 @@
   </div>
   <br>
 
-  <div class="p-field-checkbox">
-    
-    <p-checkbox id="ExclusiveToCompanyEmployees" formControlName="ExclusiveToCompanyEmployees" binary="true"></p-checkbox> 
-    <label for="ExclusiveToCompanyEmployees" class="custom-label">Exclusive To Company Employees?</label>
+  <div class="p-field">
+    <label>Exclusive To Company Employees?</label>
+    <div class="radio-group">
+      <p-radioButton name="ExclusiveToCompanyEmployees" value="true" formControlName="ExclusiveToCompanyEmployees" label="Yes"></p-radioButton>
+      <p-radioButton name="ExclusiveToCompanyEmployees" value="false" formControlName="ExclusiveToCompanyEmployees" label="No"></p-radioButton>
+    </div>
   </div>
-  <br><br>
 
-  <button type="submit" pButton label="Save Course"></button>
+  <button type="submit" pButton label="Save Course" [disabled]="!createCourseForm.valid"></button>
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

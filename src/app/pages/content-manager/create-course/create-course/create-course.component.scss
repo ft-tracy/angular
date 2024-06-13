@@ -1,21 +1,21 @@
-// styles.scss
-
 // Define color variables
 $primary-color: #001f3f; // Navy Blue
 $accent-color: #ff6600; // Burnt Orange
 $background-color: #a7a7bb;
 $input-border-color: #ccc;
 $input-focus-border-color: $primary-color;
-$label-color: #001f3f ;
-$text-color: #ffffff; // Black for visibility
+$label-color: #001f3f;
+$text-color: #ffffff; 
 
 form {
-  width: 400px;
+  width: 600px;
   margin: 0 auto;
   padding: 20px;
   background-color: $background-color;
   border: 1px solid $input-border-color;
   border-radius: 5px;
+  max-height: 100vh;
+  overflow-y: auto;
 
   .header {
     background-color: $primary-color;
@@ -24,6 +24,8 @@ form {
     border-radius: 10px 10px 0 0;
     text-align: center;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
 
     h3 {
       margin: 0;
@@ -39,23 +41,6 @@ form {
       color: $label-color;
       font-weight: bold;
     }
-
-    
-    .custom-checkbox {
-        .p-checkbox-label {
-          color: $primary-color !important;  // Navy blue color
-        }
-      }
-
-      .custom-label {
-        color: #000080; // Navy blue color
-        margin-right: 10px; // Adjust spacing as needed
-        font-weight: bold; // Optional: make the label bold
-        vertical-align: middle; // Align with the checkbox
-      }
-        
-      
-
 
     input[type="file"],
     input[type="text"],
@@ -80,6 +65,30 @@ form {
       margin-left: 5px;
       color: black;
     }
+
+    .tag, .module {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 5px;
+
+      input {
+        flex: 1;
+        margin-right: 10px;
+      }
+
+      .remove-icon {
+        cursor: pointer;
+        color: #c65205;
+        border-radius: 2.5px;
+        font-size: 1.5em;
+        font-weight: bolder;
+
+        &:hover {
+          color: darken($accent-color, 10%);
+        }
+      }
+    }
   }
 
   .preview {
@@ -96,7 +105,7 @@ form {
     }
   }
 
-  button{
+  button {
     background-color: $accent-color;
     border: none;
     padding: 5px 10px;
@@ -122,8 +131,22 @@ form {
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: lighten($primary-color, 5%);
+      background-color: darken($primary-color, 5%);
     }
+
+    &:disabled {
+      background-color: darken($primary-color, 20%);
+      cursor: not-allowed;
+    }
+  }
+
+  .radio-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .radio-group label {
+    margin-right: 10px;
   }
 }
 

@@ -10,7 +10,6 @@ import { ButtonModule } from 'primeng/button';
 import { LoginComponent } from './pages/login/login.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card'
 import { HttpClientModule } from '@angular/common/http';
@@ -27,6 +26,9 @@ import { AvatarModule } from 'primeng/avatar';
 import { CreateCourseComponent } from './pages/content-manager/create-course/create-course/create-course.component';
 // import { CourseListComponent } from './pages/content-manager/course-list/course-list.component';
 // import { ContentfulService } from './services/contentful/contentful.service';
+
+import { InputTextModule } from 'primeng/inputtext';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 
 @NgModule({
@@ -55,11 +57,15 @@ import { CreateCourseComponent } from './pages/content-manager/create-course/cre
    MenuModule, 
    BadgeModule, 
    RippleModule, 
-   AvatarModule
+   AvatarModule,
+   InputTextModule,
+   ButtonModule,
+   RadioButtonModule
 
   ],
   // providers: [ContentfulService],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
