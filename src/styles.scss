@@ -8,6 +8,12 @@
 //PrimeFlex
 @import "../node_modules/primeflex/primeflex.scss";
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+//Quill Rich Editor Styles
+@import "../node_modules/quill/dist/quill.core.css";
+@import "../node_modules/quill/dist/quill.snow.css";
+
+
 html,
 body{
     height: 100%;

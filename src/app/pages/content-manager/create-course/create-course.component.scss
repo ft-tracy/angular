@@ -7,12 +7,10 @@ $input-focus-border-color: $primary-color;
 $label-color: #001f3f;
 $text-color: #ffffff; 
 
-// body {
-//   background-color: #ffffff; // Set main background color to white
-// }
+
 
 form {
-  width: 600px;
+  width: 800px;
   margin: 0 auto;
   padding: 20px;
   background-color: $background-color;
@@ -44,13 +42,12 @@ form {
       margin-bottom: 5px;
       color: $label-color;
       font-weight: bold;
+      font-size: larger;
     }
 
     input[type="file"],
     input[type="text"],
-    input[type="date"],
     p-inputtext,
-    p-calendar,
     p-checkbox {
       width: 100%;
       padding: 10px;
@@ -154,10 +151,17 @@ form {
     margin-right: 10px;
     color: $primary-color !important;
     font-weight: bold;
+    font-size: large;
   }
 
   .invisible{
     color: $background-color;
+  }
+
+  .error {
+    color: red;
+    font-weight: 400;
+    font-size: medium;
   }
   
  

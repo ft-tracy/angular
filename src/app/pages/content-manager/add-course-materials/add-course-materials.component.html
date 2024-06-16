@@ -1,0 +1,118 @@
+<div class="container">
+  <form >
+    <!-- [formGroup]="contentForm" (ngSubmit)="onSubmit()" -->
+    <div class="header">
+      <h3>Add Course Materials</h3>
+    </div>
+
+    <div class="form-group">
+      <button type="button" (click)="addContent('richText')">Add Rich Text</button>
+      <button type="button" (click)="addContent('video')">Add Video</button>
+      <button type="button" (click)="addContent('image')">Add Image</button>
+    </div> 
+
+   <div class="form-group">
+      <label for="richText">Rich Text Editor</label>
+      <!-- <p-editor formControlName="richText" [style]="{'height':'320px'}"></p-editor> -->
+    </div>
+
+    <button type="submit" [disabled]="contentForm.invalid">Save Course</button>
+
+
+
+  </form>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- //add-course-materials.component.html code file
+<form [formGroup]="addCourseMaterialsForm" (ngSubmit)="onSubmit()">
+  <div>
+    <h3>Add Training Materials to Module</h3>
+  </div>
+
+  <div *ngFor="let material of materials.controls; let i= index">
+    <div [formGroupName]="i">
+      <label>{{ material.value.type | titlecase }} Content</label>
+      <input *ngIf="material.value.type !== 'quiz'" type="text" formControlName="content">
+      
+      <div *ngIf="material.value.type === 'quiz'">
+        <label>Question</label>
+        <input type="text" formControlName="question">
+
+        <div formArrayName="options">
+          <div *ngFor="let option of material.get('options').controls as FormArray; let j = index" [formGroupName]="j">
+            <input type="text" formControlName="option">
+            <button type="button" (click)="removeOption(i, j)">Remove Option</button>
+          </div>
+        </div>
+        <button type="button" (click)="addOption(i)">Add Option</button>
+
+        <label>Correct Answer</label>
+        <input type="text" formControlName="correctAnswer">
+      </div>
+    </div>
+    <button type="button" (click)="materials.removeAt(i)">Remove Material</button>
+  </div>
+  
+  <button type="button" (click)="addMaterials('rich-text')">Add Rich Text</button>
+  <button type="button" (click)="addMaterials('video')">Add Video</button>
+  <button type="button" (click)="addMaterials('image')">Add Image</button>
+  <button type="button" (click)="addMaterials('quiz')">Add Quiz</button>
+  
+  <button type="submit" [disabled]="!addCourseMaterialsForm.valid">Save Changes</button>
+</form> -->

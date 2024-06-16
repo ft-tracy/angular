@@ -1,3 +1,4 @@
+<!-- //create-course.component.html -->
 <form [formGroup]="createCourseForm" (ngSubmit)="onSubmit()">
   <div class="header">
     <h3>Create Course</h3>
@@ -20,11 +21,13 @@
 
   <div class="p-field">
     <label for="CourseDescription">Course Description:</label>
-    <input type="text" id="CourseDescription" pInputText formControlName="CourseDescription">
-  </div>
+    <input type="text" id="CourseDescription" pInputText formControlName="CourseDescription" maxlength="500">
+      <small class="error">Course description cannot exceed 500 characters.</small>
+    </div>
+
   <br>
 
-  <div class="p-field">
+  <div class="p-field" [formGroupName]="COURSE_TAGS">
     <label for="CourseTags">Course Tags:</label>
     <div *ngFor="let tag of CourseTags.controls; let i = index" class="tag">
       <input type="text" pInputText [formControlName]="i">
@@ -35,7 +38,7 @@
   </div>
   <br>
 
-  <div class="p-field">
+  <div class="p-field" [formGroupName]="COURSE_MODULES">
     <label for="CourseModules">Course Modules:</label>
     <div *ngFor="let module of CourseModules.controls; let i = index" class="module">
       <input type="text" pInputText [formControlName]="i">
@@ -46,23 +49,20 @@
   </div>
   <br>
 
-  <div class="p-field">
-    <label for="CreatedOn">Created On:</label>
-    <input type="date" id="CreatedOn" formControlName="CreatedOn">
-  </div>
+ 
   <br>
 
   <div class="p-field">
     <label>Exclusive To Company Employees?</label>
     <div class="radio-group">
-      <span class="invisible">..................................................</span>
+      <span class="invisible">...........................................................</span>
       <p-radioButton name="ExclusiveToCompanyEmployees" value="true" formControlName="ExclusiveToCompanyEmployees" label="Yes"></p-radioButton>
-      <span class="invisible">........................................</span>
+      <span class="invisible">........................................................................................</span>
       <p-radioButton  name="ExclusiveToCompanyEmployees" value="false" formControlName="ExclusiveToCompanyEmployees" label="No"></p-radioButton>
     </div>
   </div>
 
-  <button type="submit" pButton label="Save Course" [disabled]="!createCourseForm.valid"></button>
+  <button type="submit" pButton label="Save Course" [disabled]="!createCourseForm.valid" ></button>
 </form>
 
 

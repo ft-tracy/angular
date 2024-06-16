@@ -25,18 +25,18 @@ const routes: Routes = [
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     
   },
   {
     path: 'admin',
     component: AdminComponent,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'content-manager',
     component: ContentManagerComponent,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'sidebar',

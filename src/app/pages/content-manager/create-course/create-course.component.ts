@@ -1,6 +1,9 @@
+//create-course.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import "primeicons/primeicons.css";
+import { CourseDataService } from '../../../services/course-data/course-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-course',
@@ -11,27 +14,27 @@ export class CreateCourseComponent implements OnInit {
   createCourseForm!: FormGroup;
   courseImagePreview: string | ArrayBuffer | null = null;
 
-  private readonly COURSE_IMAGE = 'CourseImage';
+  private readonly COURSE_IMAGE = 'file';
   private readonly COURSE_TITLE = 'CourseTitle';
   private readonly COURSE_DESCRIPTION = 'CourseDescription';
-  private readonly COURSE_TAGS = 'CourseTags';
-  private readonly COURSE_MODULES = 'CourseModules';
-  private readonly CREATED_ON = 'CreatedOn';
+  public readonly COURSE_TAGS = 'CourseTags';
+  public readonly COURSE_MODULES = 'CourseModules';
+  // private readonly CREATED_ON = 'CreatedOn';
   private readonly EXCLUSIVE_TO_COMPANY_EMPLOYEES = 'ExclusiveToCompanyEmployees';
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private coursedataService: CourseDataService, private router:Router) {}
 
   ngOnInit(): void {
     this.createCourseForm = this.fb.group({
       [this.COURSE_IMAGE]: [null, Validators.required],
       [this.COURSE_TITLE]: ['', Validators.required],
-      [this.COURSE_DESCRIPTION]: ['', Validators.required],
+      [this.COURSE_DESCRIPTION]: ['', [Validators.required, Validators.maxLength(500)]],
       [this.COURSE_TAGS]: this.fb.array([]),
       [this.COURSE_MODULES]: this.fb.array([]),
-      [this.CREATED_ON]: [new Date(), Validators.required],
       [this.EXCLUSIVE_TO_COMPANY_EMPLOYEES]: ['', Validators.required]
     });
   }
+
 
   get CourseTags(): FormArray {
     return this.createCourseForm.get(this.COURSE_TAGS) as FormArray;
@@ -41,9 +44,11 @@ export class CreateCourseComponent implements OnInit {
     return this.createCourseForm.get(this.COURSE_MODULES) as FormArray;
   }
 
-  addTag(tag: string = ''): void {
+  
+  addTag(tag: any): void {
     this.CourseTags.push(this.fb.control(tag, Validators.required));
   }
+
 
   removeTag(index: number): void {
     this.CourseTags.removeAt(index);
@@ -75,12 +80,27 @@ export class CreateCourseComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.createCourseForm.valid) {
-      console.log(this.createCourseForm.value);
-    }
+
+    if (this,this.createCourseForm.valid) {
+      const formData = new FormData();
+
+      Object.keys(this.createCourseForm.controls).forEach(key => {
+        if (key === this.COURSE_TAGS || key === this.COURSE_MODULES) {
+          const FormArray= this.createCourseForm.get(key) as FormArray;
+          FormArray.controls.forEach((control, index) => {
+            formData.append(`${key}[${index}]`, control.value);
+          });
+        } else {
+          formData.append(key, this.createCourseForm.get(key)?.value);
+        }
+      });
+
+    this.coursedataService.createCourse(formData).subscribe(response => {
+      console.log(response);
+      this.router.navigate (['/course-list']);
+    },error => {
+      console.log(error);
+    });
   }
 }
-
-
-
-
+}

@@ -1,6 +1,7 @@
-<div>
+//course-list.component.html
+<!-- <div>
   <button type="button" (click)="createNewCourse()" aria-label="Add New Course" pButton label="Create New Course"></button>
-</div>
+</div> -->
 
 <div *ngIf="courses.length === 0">
   <p>No courses have been created.</p>
@@ -16,10 +17,6 @@
       </div>
       <div class="course-tags">
         <span *ngFor-="let tag of course.CourseTags">{{ tag }}</span>
-      </div>
-      <div class="course-footer">
-        <p>Created On: {{course.CreatedOn | date}}</p>
-        <p *ngIf="course.ExclusiveToCompanyEmployees">Exclusive to Company Employees</p>
       </div>
 
   </div>

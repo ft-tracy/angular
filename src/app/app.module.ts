@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,14 +22,14 @@ import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { MenuModule } from 'primeng/menu';
 import { BadgeModule } from 'primeng/badge';
 import { RippleModule } from 'primeng/ripple';
-import { AvatarModule } from 'primeng/avatar';
 import { CreateCourseComponent } from './pages/content-manager/create-course/create-course.component';
-// import { CourseListComponent } from './pages/content-manager/course-list/course-list.component';
-// import { ContentfulService } from './services/contentful/contentful.service';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
+
+import { EditorModule } from 'primeng/editor';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,6 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     ContentManagerComponent,
     SidebarComponent,
     CreateCourseComponent,
-    // CourseListComponent,
     // AppLayoutComponent,
   ],
   imports: [
@@ -57,15 +56,19 @@ import { RadioButtonModule } from 'primeng/radiobutton';
    MenuModule, 
    BadgeModule, 
    RippleModule, 
-   AvatarModule,
+ 
    InputTextModule,
    ButtonModule,
-   RadioButtonModule
+   RadioButtonModule,
+
+   EditorModule,
+   FileUploadModule,
+
 
   ],
-  // providers: [ContentfulService],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AppModule { }
