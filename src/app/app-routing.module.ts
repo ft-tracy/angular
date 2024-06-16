@@ -8,7 +8,7 @@ import { ContentManagerComponent } from './pages/content-manager/content-manager
 import { authGuard } from './guards/auth.guard';
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { CreateCourseComponent } from './pages/content-manager/create-course/create-course.component';
-// import { };
+import { CourseListComponent } from './pages/content-manager/course-list/course-list.component';
 
 const routes: Routes = [
   {
@@ -46,6 +46,11 @@ const routes: Routes = [
     path: 'create-course',
     component: CreateCourseComponent,
   },
+  {
+    path: 'course-list',
+    component: CourseListComponent,
+  },
+ 
 ];
 
 @NgModule({

@@ -1,0 +1,104 @@
+// course-list.component.scss
+// @import '~primeng/resources/themes/saga-blue/theme.css';
+// @import '~primeng/resources/primeng.min.css';
+
+// Define color variables
+$primary-color: #001f3f; // Navy Blue
+$accent-color: #ff6600; // Burnt Orange
+$background-color: #a7a7bb;
+$input-border-color: #ccc;
+$input-focus-border-color: $primary-color;
+$label-color: #001f3f;
+$text-color: #ffffff;
+
+.course-list {
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: $background-color;
+  border: 1px solid $input-border-color;
+  border-radius: 5px;
+  max-height: 100vh;
+  overflow-y: auto;
+
+  .header {
+    background-color: $primary-color;
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+
+    h3 {
+      margin: 0;
+    }
+  }
+
+  .course-item {
+    margin-bottom: 20px;
+    background-color: lighten($background-color, 10%);
+    border: 1px solid $input-border-color;
+    border-radius: 5px;
+    padding: 15px;
+
+    .course-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      img {
+        max-width: 100px;
+        max-height: 100px;
+        margin-right: 15px;
+        border: 1px solid $input-border-color;
+        border-radius: 3px;
+      }
+
+      h4 {
+        margin: 0;
+        color: $primary-color;
+      }
+
+      p {
+        margin: 0;
+        color: darken($primary-color, 20%);
+      }
+    }
+
+    .course-tags {
+      margin-top: 10px;
+
+      span {
+        background-color: $primary-color;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 3px;
+        margin-right: 5px;
+        display: inline-block;
+      }
+    }
+  }
+
+  .add-course-button {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 20px;
+
+    button {
+      background-color: $accent-color;
+      border: none;
+      padding: 10px 20px;
+      color: #ffffff;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: darken($accent-color, 10%);
+      }
+    }
+  }
+}
+

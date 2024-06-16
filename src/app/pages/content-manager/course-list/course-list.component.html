@@ -1,26 +1,31 @@
-//course-list.component.html
-<!-- <div>
-  <button type="button" (click)="createNewCourse()" aria-label="Add New Course" pButton label="Create New Course"></button>
-</div> -->
-
-<div *ngIf="courses.length === 0">
-  <p>No courses have been created.</p>
-</div>
-
-<div *ngIf="courses.length ===0">
-  <div *ngFor="let course of courses">
-    <div class="course-item"></div>
-      <div class="course-header">
-        <img *ngIf="course.CourseImage" [src]="course.CourseImage" alt="Course Image">
-        <h4>{{ course.CourseTitle}}</h4>
-        <p>{{ course.CourseDescription }}</p>
-      </div>
-      <div class="course-tags">
-        <span *ngFor-="let tag of course.CourseTags">{{ tag }}</span>
-      </div>
-
+<!-- course-list.component.html -->
+<div class="course-list">
+  <div class="header">
+    <h3>Existing Courses</h3>
   </div>
 
+  <div class="add-course-button">
+    <button type="button" (click)="createNewCourse()" aria-label="Add New Course" pButton label="Create New Course"></button>
+  </div>
+
+  <div *ngIf="courses.length === 0">
+    <h3>No courses have been created.</h3>
+  </div>
+
+  <div *ngIf="courses.length > 0">
+    <div *ngFor="let course of courses" class="course-item">
+      <div class="course-header">
+        <img *ngIf="course.CourseImage" [src]="course.CourseImage" alt="Course Image">
+        <div>
+          <h4>{{ course.CourseTitle }}</h4>
+          <p>{{ course.CourseDescription }}</p>
+        </div>
+      </div>
+      <div class="course-tags">
+        <span *ngFor="let tag of course.CourseTags">{{ tag }}</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 

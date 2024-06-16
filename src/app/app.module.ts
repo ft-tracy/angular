@@ -31,6 +31,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { EditorModule } from 'primeng/editor';
 import { FileUploadModule } from 'primeng/fileupload';
 
+import {  CourseListComponent } from './pages/content-manager/course-list/course-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +44,9 @@ import { FileUploadModule } from 'primeng/fileupload';
     SidebarComponent,
     CreateCourseComponent,
     // AppLayoutComponent,
+
+    CourseListComponent,
+
   ],
   imports: [
     BrowserModule,
