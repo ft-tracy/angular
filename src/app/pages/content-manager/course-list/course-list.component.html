@@ -17,18 +17,23 @@
       <div class="course-header">
         <div>
           <h4>{{ course.courseTitle }}</h4>
+          <BR>
           <p>{{ course.courseDescription }}</p>
         </div>
       </div>
+
 
       <div class="course-tags">
         <span *ngFor="let tag of course.courseTags">{{ tag }}</span>
       </div>
 
+      <BR>
+
       <div class="course-modules">
         <ol>
           <li *ngFor="let module of course.courseModules">
-            <a (click)="goToAddCourseMaterials(course.courseTitle, module)">{{ module }}</a>
+            <a (click)="goToAddCourseMaterials(course.courseTitle, module)" title="add training materials to module">{{ module }}</a>
+            <span class="tooltip">add training materials to module</span>
           </li>
         </ol>
       </div>

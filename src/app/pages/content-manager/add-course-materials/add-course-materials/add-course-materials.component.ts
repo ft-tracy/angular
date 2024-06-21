@@ -20,7 +20,7 @@ export class AddCourseMaterialsComponent implements OnInit {
   uploadProgress: number = 0;
 
   courseTitle: string = '';
-  moduleTitle: string = '';
+  module: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +36,7 @@ export class AddCourseMaterialsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.courseTitle = params['courseTitle'] || 'Unknown Course';
-      this.moduleTitle = params['moduleTitle'] || 'Unknown Module';
+      this.module = params['module'] || 'Unknown Module';
     });
   }
 

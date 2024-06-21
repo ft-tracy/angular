@@ -8,6 +8,8 @@ $input-border-color: #ccc;
 $input-focus-border-color: $primary-color;
 $label-color: #001f3f;
 $text-color: #ffffff;
+$accent-color-light: lighten($accent-color, 15%);
+$primary-color-light: lighten($primary-color, 15%);
 
 
 .course-list {
@@ -47,22 +49,16 @@ $text-color: #ffffff;
       align-items: center;
       margin-bottom: 10px;
 
-      img {
-        max-width: 100px;
-        max-height: 100px;
-        margin-right: 15px;
-        border: 1px solid $input-border-color;
-        border-radius: 3px;
-      }
-
       h4 {
         margin: 0;
         color: $primary-color;
+        font-size: x-large;
       }
 
       p {
         margin: 0;
-        color: darken($primary-color, 20%);
+        color: darken($primary-color, 10%);
+        font-size: medium;
       }
     }
 
@@ -70,7 +66,7 @@ $text-color: #ffffff;
       margin-top: 10px;
 
       span {
-        background-color: $primary-color;
+        background-color: $primary-color-light;
         color: #fff;
         padding: 5px 10px;
         border-radius: 3px;
@@ -82,25 +78,72 @@ $text-color: #ffffff;
     .course-modules {
       margin-top: 10px;
 
-      ul {
+      
+      ol {
         list-style-type: none;
         padding: 0;
 
         li {
-          background-color: $accent-color;
-          color: #fff;
+          background-color: $accent-color-light; // Lighter background color
+          color: $accent-color;
           padding: 5px 10px;
           border-radius: 3px;
           margin-bottom: 5px;
           cursor: pointer;
           transition: background-color 0.3s;
 
+          a {
+            color: $primary-color;
+            font-size: medium;
+            font-weight: 550;
+            text-decoration: underline; // Underline the module name
+          }
+
           &:hover {
-            background-color: darken($accent-color, 10%);
+            background-color: darken($accent-color-light, 10%);
             cursor: pointer;
           }
         }
       }
+    }
+  }
+
+  .module-item {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    .tooltip {
+      visibility: hidden;
+      width: 200px;
+      background-color: $accent-color;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Position the tooltip above the text */
+      left: 50%;
+      margin-left: -100px; /* Use half of the tooltip width to center it */
+      opacity: 0;
+      transition: opacity 0.1s;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 100%; /* At the bottom of the tooltip */
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: $accent-color transparent transparent transparent; /* Arrow pointing down */
+      }
+    }
+
+    &:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
     }
   }
 
@@ -112,6 +155,8 @@ $text-color: #ffffff;
     button {
       background-color: $accent-color;
       border: none;
+      font-size: medium;
+      font-weight: 500;
       padding: 10px 20px;
       color: #ffffff;
       border-radius: 3px;
@@ -124,3 +169,4 @@ $text-color: #ffffff;
     }
   }
 }
+

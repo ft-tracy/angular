@@ -43,11 +43,11 @@ export class CourseListComponent implements OnInit {
     this.router.navigate(['/create-course']);
   }
 
-  goToAddCourseMaterials(courseTitle: string, moduleTitle: string): void {
+  goToAddCourseMaterials(courseTitle: string, module: string): void {
     this.router.navigate(['/course-content'], {
       queryParams: {
         courseTitle: courseTitle,
-        moduleTitle: moduleTitle
+        module: module,
       }
     });
   }
