@@ -1,0 +1,45 @@
+<!-- add-course-materials.component.html -->
+<form (ngSubmit)="saveChanges()" class="add-course-materials-form" [formGroup]="courseForm">
+  <div class="header">
+    <h3>Add Course Content</h3>
+  </div>
+
+  <!-- Video Upload -->
+  <div class="p-field">
+    <label for="video">Video Content:</label>
+    <p-fileUpload 
+      name="video" 
+      chooseIcon="pi pi-upload"
+      chooseLabel="Upload Video" 
+      mode="basic" 
+      accept="video/*" 
+      maxFileSize="100000000" 
+      (onSelect)="onVideoSelect($event)" 
+      (onRemove)="onVideoRemove()"
+      #videoUpload
+    ></p-fileUpload>
+    <div *ngIf="videoPreview">
+      <video [src]="videoPreview" controls width="100%"></video>
+      <br>
+      <button type="button" class="remove-video" (click)="removeVideo()">Remove Video</button>
+    </div>
+    <br>
+    <p-progressBar class="video-progress-bar" *ngIf="uploadProgress > 0 && uploadProgress < 100" [value]="uploadProgress"></p-progressBar>
+  </div>
+
+  <!-- Rich Text Editor for Text and Images -->
+  <div class="p-field">
+    <label for="content">Reading Content:</label>
+    <p-editor formControlName="content" [(ngModel)]="editorContent" [style]="{'height':'320px'}" [placeholder]="'Enter course content'">
+    
+    </p-editor>
+  </div>
+
+  <!-- Save Changes Button -->
+  <div class="p-field">
+    <button type="submit" [disabled]="!isFormValid()" class="save-button">Save Changes</button>
+  </div>
+</form>
+
+
+

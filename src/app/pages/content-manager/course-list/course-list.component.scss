@@ -1,6 +1,4 @@
 // course-list.component.scss
-// @import '~primeng/resources/themes/saga-blue/theme.css';
-// @import '~primeng/resources/primeng.min.css';
 
 // Define color variables
 $primary-color: #001f3f; // Navy Blue
@@ -10,6 +8,7 @@ $input-border-color: #ccc;
 $input-focus-border-color: $primary-color;
 $label-color: #001f3f;
 $text-color: #ffffff;
+
 
 .course-list {
   width: 800px;
@@ -79,6 +78,30 @@ $text-color: #ffffff;
         display: inline-block;
       }
     }
+
+    .course-modules {
+      margin-top: 10px;
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+
+        li {
+          background-color: $accent-color;
+          color: #fff;
+          padding: 5px 10px;
+          border-radius: 3px;
+          margin-bottom: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          &:hover {
+            background-color: darken($accent-color, 10%);
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
 
   .add-course-button {
@@ -101,4 +124,3 @@ $text-color: #ffffff;
     }
   }
 }
-

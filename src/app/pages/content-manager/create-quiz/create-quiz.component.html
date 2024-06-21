@@ -1,0 +1,39 @@
+<form [formGroup]="createQuizForm" (ngSubmit)="onSubmit()">
+    <div class="header">
+      <h3>Create Quiz</h3>
+    </div>
+  
+    <div class="p-field">
+      <label for="question">Question:</label>
+      <input type="text" id="question" formControlName="question">
+    </div>
+    <br>
+  
+    <div class="p-field">
+      <label for="answers">Answer Options:</label>
+      <div formArrayName="answers">
+        <div *ngFor="let answer of answers.controls; let i = index" [formGroupName]="i" class="answer-option">
+          <input type="text" formControlName="answer">
+          <span class="remove-icon" (click)="removeAnswer(i)"><i class="pi pi-times-circle" style="font-size: 2rem"></i></span>
+        </div>
+      </div>
+      <br>
+      <button type="button" (click)="addAnswer()">Add Answer</button>
+    </div>
+    <br>
+  
+    <div class="p-field">
+      <label for="correctAnswer">Correct Answer:</label>
+      <select id="correctAnswer" formControlName="correctAnswer">
+        <option *ngFor="let answer of answers.controls; let i = index" [value]="i">
+          Answer {{ i + 1 }}
+        </option>
+      </select>
+    </div>
+    <br>
+  
+    <button type="submit" [disabled]="!createQuizForm.valid">Create Quiz</button>
+  </form>
+  
+  
+  

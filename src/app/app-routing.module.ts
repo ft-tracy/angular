@@ -9,6 +9,8 @@ import { authGuard } from './guards/auth.guard';
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { CreateCourseComponent } from './pages/content-manager/create-course/create-course.component';
 import { CourseListComponent } from './pages/content-manager/course-list/course-list.component';
+import { AddCourseMaterialsComponent } from './pages/content-manager/add-course-materials/add-course-materials/add-course-materials.component';
+import { CreateQuizComponent } from './pages/content-manager/create-quiz/create-quiz.component';
 
 const routes: Routes = [
   {
@@ -50,7 +52,15 @@ const routes: Routes = [
     path: 'course-list',
     component: CourseListComponent,
   },
- 
+  {
+    path: 'course-content',
+    component: AddCourseMaterialsComponent,
+  },
+  {
+    path: 'create-quiz',
+    component: CreateQuizComponent,
+  },
+  
 ];
 
 @NgModule({

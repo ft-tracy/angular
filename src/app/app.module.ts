@@ -32,6 +32,10 @@ import { EditorModule } from 'primeng/editor';
 import { FileUploadModule } from 'primeng/fileupload';
 
 import {  CourseListComponent } from './pages/content-manager/course-list/course-list.component';
+import { AddCourseMaterialsComponent } from './pages/content-manager/add-course-materials/add-course-materials/add-course-materials.component';
+
+import { MessageService } from 'primeng/api';
+import { CreateQuizComponent } from './pages/content-manager/create-quiz/create-quiz.component';
 
 @NgModule({
   declarations: [
@@ -42,10 +46,11 @@ import {  CourseListComponent } from './pages/content-manager/course-list/course
     AdminComponent,
     ContentManagerComponent,
     SidebarComponent,
+    
     CreateCourseComponent,
-    // AppLayoutComponent,
-
     CourseListComponent,
+    AddCourseMaterialsComponent,
+    CreateQuizComponent,
 
   ],
   imports: [
@@ -71,7 +76,7 @@ import {  CourseListComponent } from './pages/content-manager/course-list/course
 
 
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

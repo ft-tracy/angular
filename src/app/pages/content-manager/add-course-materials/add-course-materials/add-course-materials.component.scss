@@ -1,0 +1,101 @@
+// add-course-materials.component.scss
+
+// Define color variables
+$primary-color: #001f3f; // Navy Blue
+$accent-color: #ff6600; // Burnt Orange
+$background-color: #a7a7bb;
+$input-border-color: #ccc;
+$input-focus-border-color: $primary-color;
+$label-color: #001f3f;
+
+.add-course-materials-form {
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: $background-color;
+  border: 1px solid $input-border-color;
+  border-radius: 5px;
+  max-height: 100vh;
+  overflow-y: auto;
+
+  .header {
+    background-color: $primary-color;
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    margin-bottom: 20px;
+
+    h3 {
+      margin: 0;
+    }
+  }
+
+  .p-field {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: $label-color;
+      font-weight: bold;
+      font-size: larger;
+    }
+
+    p-editor {
+      width: 100%;
+    }
+
+    button.save-button {
+      width: 100%;
+      background-color: $accent-color;
+      border: none;
+      padding: 10px;
+      color: #ffffff;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: darken($accent-color, 10%);
+      }
+
+      &:disabled {
+        background-color: darken($accent-color, 20%);
+        cursor: not-allowed;
+      }
+    }
+
+    button {
+      margin-top: 10px;
+      background-color: $primary-color;
+      color: #ffffff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+
+    .remove-video {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px; /* Adjust margin as needed */
+    }
+
+    .video-progress-bar{
+      color: $accent-color;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+  }
+}
+
+
+
+
