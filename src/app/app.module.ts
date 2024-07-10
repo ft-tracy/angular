@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './pages/landing/landing.component';
-import { AppLayoutComponent } from './layout/app.layout.component';
-import { AppLayoutModule } from './layout/app.layout.module';
+// import { AppLayoutComponent } from './layout/app.layout.component';
+// import { AppLayoutModule } from './layout/app.layout.module';
 import { ButtonModule } from 'primeng/button';
 import { LoginComponent } from './pages/login/login.component';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -13,8 +13,6 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card'
 import { HttpClientModule } from '@angular/common/http';
-import { AdminComponent } from './pages/admin/admin.component';
-import { ContentManagerComponent } from './pages/content-manager/content-manager.component';
 
 //admin dashboard
 import { SidebarModule } from 'primeng/sidebar';
@@ -37,20 +35,34 @@ import { AddCourseMaterialsComponent } from './pages/content-manager/add-course-
 import { MessageService } from 'primeng/api';
 import { CreateQuizComponent } from './pages/content-manager/create-quiz/create-quiz.component';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ViewUsersComponent } from './pages/admin/user-management/view-users/view-users.component';
+import { AddUserComponent } from './pages/admin/user-management/add-user/add-user.component';
+import { UpdateUserComponent } from './pages/admin/user-management/update-user/update-user.component';
+import { UserService } from './services/user-management/user.service';
+import { CmSidebarComponent } from './pages/content-manager/cm-sidebar/cm-sidebar.component';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { CmDashboardComponent } from './pages/content-manager/cm-dashboard/cm-dashboard.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     LoginComponent,
     ResetPasswordComponent,
-    AdminComponent,
-    ContentManagerComponent,
     SidebarComponent,
     
     CreateCourseComponent,
     CourseListComponent,
     AddCourseMaterialsComponent,
     CreateQuizComponent,
+    ViewUsersComponent,
+    AddUserComponent,
+    UpdateUserComponent,
+    CmSidebarComponent,
+    AdminDashboardComponent,
+    CmDashboardComponent,
 
   ],
   imports: [
@@ -74,9 +86,10 @@ import { CreateQuizComponent } from './pages/content-manager/create-quiz/create-
    EditorModule,
    FileUploadModule,
 
+   DragDropModule,
 
   ],
-  providers: [MessageService],
+  providers: [MessageService, UserService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

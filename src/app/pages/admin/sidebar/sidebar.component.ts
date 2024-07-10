@@ -1,11 +1,7 @@
-
+// sidebar.component.ts 
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { MenuModule } from 'primeng/menu';
-import { BadgeModule } from 'primeng/badge';
-import { RippleModule } from 'primeng/ripple';
-import { AvatarModule } from 'primeng/avatar';
-import { CardModule } from 'primeng/card';
+
 
 @Component({
   selector: 'app-sidebar',

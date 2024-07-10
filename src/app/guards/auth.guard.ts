@@ -1,3 +1,5 @@
+// auth.guard.ts
+
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
@@ -19,16 +21,20 @@ export class authGuard implements CanActivate {
         return false;
       }
       
-      if (state.url === '/admin' && role !== 'Admin') {
-        this.router.navigate(['/admin']);
+      if (!isFirstLogin && state.url === '/reset-password') {
+        this.router.navigate([`/${role === 'Admin' ? 'admin' : 'content-manager'}`]);
+        return false;
+      }
+      
+      if (state.url.startsWith('/admin') && role !== 'Admin') {
+        this.router.navigate([`/${role === 'Admin' ? 'admin' : 'content-manager'}`]);
         return false;
       }
 
-      if (state.url === '/content-manager' && role !== 'ContentManager') {
-        this.router.navigate(['/content-manager']);
+      if (state.url.startsWith('/content-manager') && role !== 'ContentManager') {
+        this.router.navigate([`/${role === 'Admin' ? 'admin' : 'content-manager'}`]);
         return false;
       }
-
       return true;
     } 
     else 

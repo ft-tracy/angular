@@ -1,0 +1,98 @@
+// Define color variables
+$primary-color: #001f3f; // Navy Blue
+$accent-color: #ff6600; // Burnt Orange
+$background-color: #a7a7bb;
+$input-border-color: #ccc;
+$input-focus-border-color: $primary-color;
+$label-color: #001f3f;
+$text-color: $primary-color;
+
+.add-user {
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: $background-color;
+  border: 1px solid $input-border-color;
+  border-radius: 5px;
+  max-height: 100vh;
+  overflow-y: auto;
+
+  .header {
+    background-color: $primary-color;
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+
+    h3 {
+      margin: 0;
+    }
+  }
+
+  .p-field {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: $label-color;
+      font-weight: bold;
+      font-size: larger;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $input-border-color;
+      border-radius: 3px;
+      outline: none;
+      transition: border-color 0.3s;
+      color: $text-color;
+      background-color: #fff;
+
+      &:focus {
+        border-color: $input-focus-border-color;
+      }
+    }
+  }
+
+  button {
+    background-color: $accent-color;
+    border: none;
+    padding: 5px 10px;
+    color: #ffffff;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken($accent-color, 10%);
+    }
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    background-color: $primary-color;
+    color: #fff5f5 !important;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken($primary-color, 5%);
+    }
+
+    &:disabled {
+      background-color: darken($primary-color, 20%);
+      cursor: not-allowed;
+    }
+  }
+}

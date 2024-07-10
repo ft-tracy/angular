@@ -1,0 +1,135 @@
+// Define color variables
+$primary-color: #001f3f; // Navy Blue
+$accent-color: #ff6600; // Burnt Orange
+$background-color: #a7a7bb;
+$input-border-color: #ccc;
+$input-focus-border-color: $primary-color;
+$label-color: #001f3f;
+$text-color: #ffffff;
+$accent-color-light: lighten($accent-color, 15%);
+$primary-color-light: lighten($primary-color, 15%);
+
+.user-management {
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: $background-color;
+  border: 1px solid $input-border-color;
+  border-radius: 5px;
+  max-height: 100vh;
+  overflow-y: auto;
+
+  .header {
+    background-color: $primary-color;
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .add-user-button {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 20px;
+
+    button {
+      background-color: $accent-color;
+      border: none;
+      font-size: medium;
+      font-weight: 500;
+      padding: 10px 20px;
+      color: #ffffff;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: darken($accent-color, 10%);
+      }
+    }
+  }
+
+  h3 {
+    color: $primary-color;
+    font-size: large;
+    margin-top: 20px;
+  }
+
+
+  .user-item {
+    margin-bottom: 20px;
+    background-color: lighten($background-color, 10%);
+    border: 1px solid $input-border-color;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .user-details {
+      display: flex;
+      flex-direction: column;
+
+      p {
+        margin: 0;
+        color: $primary-color;
+        font-weight: bold;
+      }
+    }
+
+    .invisible{
+        color: lighten($background-color, 10%);
+
+    }
+
+    .user-actions {
+      display: flex;
+      gap: 10px;
+
+      i {
+        font-size: 1.2rem;
+        color: $accent-color;
+        cursor: pointer;
+        transition: color 0.3s;
+
+        &:hover {
+          color: darken($accent-color, 10%);
+        }
+      }
+    }
+  }
+
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    button {
+      background-color: $accent-color;
+      border: none;
+      font-size: medium;
+      font-weight: 500;
+      padding: 10px 20px;
+      color: #ffffff;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:disabled {
+        background-color: lighten($accent-color, 20%);
+        cursor: not-allowed;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: darken($accent-color, 10%);
+      }
+    }
+  }
+}

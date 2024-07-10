@@ -7,11 +7,17 @@ import { LoginComponent } from './pages/login/login.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ContentManagerComponent } from './pages/content-manager/content-manager.component';
 import { authGuard } from './guards/auth.guard';
-import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { CreateCourseComponent } from './pages/content-manager/create-course/create-course.component';
 import { CourseListComponent } from './pages/content-manager/course-list/course-list.component';
 import { AddCourseMaterialsComponent } from './pages/content-manager/add-course-materials/add-course-materials/add-course-materials.component';
-import { CreateQuizComponent } from './pages/content-manager/create-quiz/create-quiz.component';
+import { ViewUsersComponent } from './pages/admin/user-management/view-users/view-users.component';
+import { AddUserComponent } from './pages/admin/user-management/add-user/add-user.component';
+import { UpdateUserComponent } from './pages/admin/user-management/update-user/update-user.component';
+import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
+import { CmSidebarComponent } from './pages/content-manager/cm-sidebar/cm-sidebar.component';
+
+
+
 
 const routes: Routes = [
   {
@@ -31,36 +37,44 @@ const routes: Routes = [
     canActivate: [authGuard],
     
   },
-  {
-    path: 'admin',
-    component: AdminComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'content-manager',
-    component: ContentManagerComponent,
-    canActivate: [authGuard],
-  },
+ 
   {
     path: 'sidebar',
     component: SidebarComponent,
   },
   {
-    path: 'create-course',
+    path: 'view-users',
+    component: ViewUsersComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'add-user',
+    component: AddUserComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'update-user',
+    component: UpdateUserComponent,
+    canActivate: [authGuard],
+  },
+
+  {
+    path: 'cm-sidebar',
+    component: CmSidebarComponent,
+  },
+  {
+    path: 'content-manager/create-course',
     component: CreateCourseComponent,
   },
   {
-    path: 'course-list',
+    path: 'content-manager/course-list',
     component: CourseListComponent,
   },
   {
-    path: 'course-content',
+    path: 'content-manager/course-content',
     component: AddCourseMaterialsComponent,
   },
-  {
-    path: 'create-quiz',
-    component: CreateQuizComponent,
-  },
+
   
 ];
 

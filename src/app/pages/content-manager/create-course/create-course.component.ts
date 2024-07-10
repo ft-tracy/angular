@@ -1,3 +1,4 @@
+// create-course.component.ts
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
@@ -21,7 +22,11 @@ export class CreateCourseComponent implements OnInit {
   public readonly COURSE_MODULES = 'CourseModules';
   private readonly EXCLUSIVE_TO_COMPANY_EMPLOYEES = 'ExclusiveToCompanyEmployees';
 
-  constructor(private fb: FormBuilder, private coursedataService: CourseDataService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private coursedataService: CourseDataService, 
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.createCourseForm = this.fb.group({

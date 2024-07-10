@@ -1,48 +1,75 @@
 <!-- add-course-materials.component.html -->
-<form (ngSubmit)="saveChanges()" class="add-course-materials-form" [formGroup]="courseForm">
+
+<form (ngSubmit)="saveChanges()" class="add-course-materials-form" [formGroup]="contentForm">
   <div class="header">
     <h3>Add Course Content</h3>
     <span>.................................................................................................................................................................................................................................</span>
     <br>
-    <h4>{{ courseTitle }} <br> {{ module }}</h4>
+    <h4>{{ courseTitle }} <br> {{ ModuleName }}</h4>
   </div>
+  <div class="button-group">
+    <button type="button" class="btn" (click)="addVideo()" [disabled]="isVideoAdded">Add Video</button>
+    <button type="button" class="btn" (click)="addReadingContent()">Add Reading Content</button>
+    <button type="button" class="btn" (click)="addQuiz()">Add Question</button>
+  </div>
+  <div class="content-container" formGroupName="contentList" #contentContainer>
+    <div cdkDropList (cdkDropListDropped)="drop($event)">
+      <div *ngFor="let content of contentList.controls; let i = index" [formGroupName]="i" cdkDrag>
 
-  <!-- Video Upload -->
-  <div class="p-field">
-    <label for="video">Video Content:</label>
-    <p-fileUpload 
-      name="video" 
-      chooseIcon="pi pi-upload"
-      chooseLabel="Upload Video" 
-      mode="basic" 
-      accept="video/*" 
-      maxFileSize="100000000" 
-      (onSelect)="onVideoSelect($event)" 
-      (onRemove)="onVideoRemove()"
-      #videoUpload
-    ></p-fileUpload>
-    <div *ngIf="videoPreview">
-      <video [src]="videoPreview" controls width="100%"></video>
-      <br>
-      <button type="button" class="remove-video" (click)="removeVideo()">Remove Video</button>
+        <div *ngIf="content.get('type')?.value === 'video'" class="border-box">
+          <label for="videoTitle">Video Title:</label>
+          <input type="text" formControlName="videoTitle" style="width: 100%;">
+          <br><br>
+          <label for="videoDescription">Video Description:</label>
+          <textarea class="text-area" style="width: 100%" formControlName="videoDescription" rows="3"></textarea>
+          <br><br>
+          <label for="video">Video Upload:</label>
+          <p-fileUpload name="VideoFile" chooseIcon="pi pi-upload" chooseLabel="Upload Video" mode="basic" accept="video/*" maxFileSize="100000000" (onSelect)="onVideoSelect($event, i)" (onRemove)="onVideoRemove(i)" #videoUpload styleClass="custom-upload-button"></p-fileUpload>
+          <div *ngIf="videoPreview">
+            <video [src]="videoPreview" controls width="100%"></video>
+            <br>
+            <button type="button" class="remove-video" (click)="removeVideo(i)">Remove Video</button>
+          </div>
+          <br>
+          <p-progressBar class="video-progress-bar" *ngIf="uploadProgress > 0 && uploadProgress < 100" [value]="uploadProgress"></p-progressBar>
+        </div>
+
+        <div *ngIf="content.get('type')?.value === 'reading'" class="border-box">
+          <label for="readingTitle">Reading Content Title:</label>
+          <input type="text" formControlName="readingTitle" style="width: 100%;">
+          <br>
+          <label for="readingContent">Reading Content:</label>
+          <br>
+          <p-editor formControlName="readingContent" [style]="{'height':'320px'}" [placeholder]="'Enter course content'"></p-editor>
+          <br>
+          <button type="button" class="remove-reading" (click)="removeReadingContent(i)">Remove Reading Content</button>
+          <br>
+        </div>
+
+        <div *ngIf="content.get('type')?.value === 'quiz'" class="border-box">
+          <label for="QuestionText">Question:</label>
+          <textarea formControlName="QuestionText"   style="width: 100%;" rows="3"></textarea>
+          <br>
+          <div formArrayName="Choices">
+            <div *ngFor="let choice of getChoices(i).controls; let j = index" [formGroupName]="j">
+              <br>
+              <label for="choice">Choice {{ j + 1 }}:</label>
+              <textarea formControlName="Choice" style="width: 70%;" rows="1"></textarea>
+              <input type="radio" formControlName="isCorrect" [value]="true" /> Correct
+              <i class="pi pi-times-circle" (click)="removeChoice(i, j)" style="cursor: pointer; color: red;" style="font-size: 2rem"></i>
+            </div>
+          </div>
+          <br>
+          <button type="button" (click)="addQuizChoice(i)">Add Choice</button>
+          <br>
+          <!-- <label for="CorrectAnswer">Correct Answer:</label> -->
+          <!-- <input type="text" formControlName="CorrectAnswer" style="width: 100%;"> -->
+          <br>
+          <button type="button" class="remove-quiz" (click)="removeQuiz(i)">Remove Question</button>
+          <br>
+        </div>
+      </div>
     </div>
-    <br>
-    <p-progressBar class="video-progress-bar" *ngIf="uploadProgress > 0 && uploadProgress < 100" [value]="uploadProgress"></p-progressBar>
   </div>
-
-  <!-- Rich Text Editor for Text and Images -->
-  <div class="p-field">
-    <label for="content">Reading Content:</label>
-    <p-editor formControlName="content" [(ngModel)]="editorContent" [style]="{'height':'320px'}" [placeholder]="'Enter course content'">
-    
-    </p-editor>
-  </div>
-
-  <!-- Save Changes Button -->
-  <div class="p-field">
-    <button type="submit" [disabled]="!isFormValid()" class="save-button">Save Changes</button>
-  </div>
+  <button type="submit" class="save-button">Save Changes</button>
 </form>
-
-
-

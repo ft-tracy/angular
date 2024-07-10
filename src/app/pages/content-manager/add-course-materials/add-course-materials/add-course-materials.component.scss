@@ -6,7 +6,24 @@ $accent-color: #ff6600; // Burnt Orange
 $background-color: #a7a7bb;
 $input-border-color: #ccc;
 $input-focus-border-color: $primary-color;
-$label-color: #001f3f;
+$label-color: $primary-color;
+$text-color: #ffffff;
+$error-color: darken($background-color, 30%);
+
+// Mixin for button styles
+@mixin button-styles($bg-color, $hover-color) {
+  background-color: $bg-color;
+  border: none;
+  padding: 10px 20px;
+  color: #ffffff;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
 
 .add-course-materials-form {
   width: 800px;
@@ -25,9 +42,31 @@ $label-color: #001f3f;
     border-radius: 10px 10px 0 0;
     text-align: center;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    h3 {
+    h3, h4 {
       margin: 0;
+    }
+
+    h4 {
+      margin-top: 10px;
+    }
+
+    span {
+      font-size: 0.8em;
+      margin-top: 10px;
+    }
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+
+    .btn {
+      @include button-styles($accent-color, darken($accent-color, 10%));
     }
   }
 
@@ -42,60 +81,178 @@ $label-color: #001f3f;
       font-size: larger;
     }
 
-    p-editor {
+    input[type="file"],
+    input[type="text"],
+    p-inputtext,
+    p-checkbox {
       width: 100%;
-    }
-
-    button.save-button {
-      width: 100%;
-      background-color: $accent-color;
-      border: none;
       padding: 10px;
-      color: #ffffff;
+      border: 1px solid $input-border-color;
       border-radius: 3px;
-      cursor: pointer;
-      transition: background-color 0.3s;
+      outline: none;
+      transition: border-color 0.3s;
+      color: $text-color;
 
-      &:hover {
-        background-color: darken($accent-color, 10%);
-      }
-
-      &:disabled {
-        background-color: darken($accent-color, 20%);
-        cursor: not-allowed;
+      &:focus {
+        border-color: $input-focus-border-color;
       }
     }
 
-    button {
-      margin-top: 10px;
-      background-color: $primary-color;
-      color: #ffffff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 3px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-
-      &:hover {
-        background-color: darken($primary-color, 10%);
-      }
+    .p-checkbox label {
+      margin-left: 5px;
+      color: black;
     }
 
-    .remove-video {
+    .tag, .module {
       display: flex;
-      justify-content: center;
-      margin-top: 10px; /* Adjust margin as needed */
-    }
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 5px;
 
-    .video-progress-bar{
-      color: $accent-color;
-      height: 10px;
+      input {
+        flex: 1;
+        margin-right: 10px;
+      }
+
+      .remove-icon {
+        cursor: pointer;
+        color: $error-color;
+        border-radius: 2.5px;
+        font-size: 1.5em;
+        font-weight: bolder;
+
+        &:hover {
+          color: darken($accent-color, 10%);
+        }
+      }
+    }
+  }
+
+  .preview {
+    border: 3px solid $input-border-color;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+    img {
+      max-width: 100%;
+      max-height: 200px;
+      border: 1px solid $input-border-color;
       border-radius: 3px;
     }
+  }
 
+  .save-button {
+    width: 100%;
+    @include button-styles($primary-color, darken($primary-color, 5%));
+    padding: 10px;
+    font-size: 16px;
+
+    &:disabled {
+      background-color: darken($primary-color, 20%);
+      cursor: not-allowed;
+    }
+  }
+
+  .video-progress-bar {
+    margin-top: 10px;
+  }
+
+  .custom-upload-button .ui-button {
+    color: $accent-color;
+  }
+
+  .remove-video,
+  .remove-reading,
+  .remove-quiz {
+    @include button-styles($error-color, darken($error-color, 10%));
+    padding: 5px 10px;
+  }
+
+  .border-box {
+    border: 2px solid $input-border-color;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: lighten($background-color, 10%);
+
+    label {
+      font-size: 1.2em;
+      color: $primary-color;
+      font-weight: bold;
+    }
+
+    .text-area {
+      width: 100%;
+      border: 1px solid $input-border-color;
+      border-radius: 3px;
+      padding: 10px;
+      color: $text-color;
+    }
+  }
+
+  .quiz-container {
+    .quiz-interface {
+      padding: 15px;
+      border: 2px solid $input-border-color;
+      border-radius: 5px;
+      background-color: lighten($background-color, 10%);
+
+      label {
+        font-size: 1.2em;
+        color: $primary-color;
+        font-weight: bold;
+      }
+
+      .text-area {
+        width: 100%;
+        border: 1px solid $input-border-color;
+        border-radius: 3px;
+        padding: 10px;
+        color: $text-color;
+      }
+
+      .quiz-options {
+        margin-top: 10px;
+
+        .option {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+
+          textarea {
+            flex: 1;
+            margin-right: 10px;
+          }
+
+          input[type="radio"] {
+            margin-right: 10px;
+          }
+
+          .remove-option {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: $error-color;
+
+            &:hover {
+              color: darken($error-color, 10%);
+            }
+          }
+        }
+      }
+
+      .add-option {
+        @include button-styles($accent-color, darken($accent-color, 10%));
+        padding: 5px 10px;
+      }
+
+      .remove-quiz {
+        @include button-styles($error-color, darken($error-color, 10%));
+        padding: 5px 10px;
+      }
+    }
   }
 }
-
-
-
-

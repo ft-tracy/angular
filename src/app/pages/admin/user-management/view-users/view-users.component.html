@@ -1,0 +1,44 @@
+<!-- view-user.component.html -->
+
+<div class="user-management">
+    <div class="header">
+      <h2>User Management</h2>
+     
+    </div>
+    
+    <div class="add-user-button">
+      <button (click)="navigateToAddUser()" pButton label="Create New User"></button>
+    </div>
+
+    <div *ngIf="users.length === 0">
+      <h3>No existing users.</h3>
+    </div>
+    
+    
+    <div *ngIf="users.length > 0 ">
+      <div *ngFor="let user of users" class="user-item">
+        <div class="user-details">
+          <p>{{ user.firstName }} {{ user.lastName }}  <span class="invisible ">................</span>
+            {{ user.role }} <span class="invisible ">.................</span>
+          {{ user.email }}</p>
+          {{ user.documentId}}
+        </div>
+        <button (click)="updateUser(user)" aria-label="Update User" pButton icon="pi pi-pencil"></button>
+        <button (click)="confirmDeleteUser(user)" aria-label="Delete User" pButton icon="pi pi-trash"></button>     
+        </div>
+        
+      
+    </div>
+  </div>
+  
+  <!-- <p-dialog header="Confirm Delete" [(visible)]="displayDeleteDialog" [modal]="true" [closable]="false">
+    <p>To confirm, type "{{ deleteUser?.FirstName }} {{ deleteUser?.LastName }}" in the box below.</p>
+    <form [formGroup]="confirmDeleteForm">
+      <input type="text" formControlName="confirmDeleteText" />
+      <div class="dialog-actions">
+        <button (click)="deleteUserConfirmed()" [disabled]="confirmDeleteForm.get('confirmDeleteText')?.value !== deleteUser?.FirstName + ' ' + deleteUser?.LastName">Delete</button>
+        <button (click)="cancelDelete()">Cancel</button>
+      </div>
+    </form>
+  </p-dialog> -->
+  

@@ -44,9 +44,9 @@ export class LoginComponent {
           } else {
             const role = this.authService.getUserRole();
             if (role === 'Admin') {
-              this.router.navigate(['/admin']);
+              this.router.navigate(['/admin/dashboard']);
             } else if (role === 'ContentManager') {
-              this.router.navigate(['/content-manager']);
+              this.router.navigate(['/content-manager/dashboard']);
             }
           }
         } else {
