@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class authGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -16,23 +16,19 @@ export class authGuard implements CanActivate {
       const isFirstLogin = this.authService.isFirstLogin();
       const role = this.authService.getUserRole();
       
-      if (state.url === '/reset-password' && !isFirstLogin) {
+      if (isFirstLogin) {
         this.router.navigate(['/reset-password']);
         return false;
       }
       
-      if (!isFirstLogin && state.url === '/reset-password') {
-        this.router.navigate([`/${role === 'Admin' ? 'admin' : 'content-manager'}`]);
-        return false;
-      }
       
-      if (state.url.startsWith('/admin') && role !== 'Admin') {
-        this.router.navigate([`/${role === 'Admin' ? 'admin' : 'content-manager'}`]);
+      if (role === 'Admin') {
+        this.router.navigate(['admin/admin-dashboard' ]);
         return false;
       }
 
-      if (state.url.startsWith('/content-manager') && role !== 'ContentManager') {
-        this.router.navigate([`/${role === 'Admin' ? 'admin' : 'content-manager'}`]);
+      if (role === 'ContentManager') {
+        this.router.navigate(['admin/admin-dashboard' ]);
         return false;
       }
       return true;

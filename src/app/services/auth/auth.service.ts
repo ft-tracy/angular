@@ -1,3 +1,5 @@
+// auth.service.ts
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -8,9 +10,11 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = 'https://e68c-41-90-101-26.ngrok-free.app'; 
-  private resetPasswordUrl ='https://e68c-41-90-101-26.ngrok-free.app';
+  private loginUrl = 'https://7120-41-90-101-26.ngrok-free.app'; 
+  private resetPasswordUrl = 'https://7120-41-90-101-26.ngrok-free.app';
   private role: string | null = null;
+  
+  
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -19,28 +23,27 @@ export class AuthService {
     return this.http.post<any>(this.loginUrl+url, { email, password }, {headers:headers}).pipe(
 
       tap(response => {
-        if (response && response.token) {
-          localStorage.setItem('token', response.token);
+        if (response && response.role) {
           this.role = response.role; // Save user role for later use
-          localStorage.setItem('isFirstLogin', response.isFirstLogin);
         }
       }),
-   
 
+      
       catchError(error => {
         console.error('Login error', error);
         return of(null);
       })
     );
-  }
+    
+    }
 
   isFirstLogin(): boolean {
     return localStorage.getItem('isFirstLogin') === 'true';
   }
    
-  resetPassword(Email: string, NewPassword: string, ConfirmPassword: string, endpoint:string): Observable<any> {
+  resetPassword(email: string, newPassword: string, confirmPassword: string, endpoint:string): Observable<any> {
     var headers = new HttpHeaders({"ngrok-skip-browser-warning": ""})
-    return this.http.post<any>(this.resetPasswordUrl+endpoint, { Email, NewPassword, ConfirmPassword}, {headers:headers}).pipe(
+    return this.http.post<any>(this.resetPasswordUrl+endpoint, { email, newPassword, confirmPassword}, {headers:headers}).pipe(
       
       tap(response => {
         if (response && response.token) {

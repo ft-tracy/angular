@@ -1,18 +1,18 @@
+// app.module.ts
+
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './pages/landing/landing.component';
-// import { AppLayoutComponent } from './layout/app.layout.component';
-// import { AppLayoutModule } from './layout/app.layout.module';
 import { ButtonModule } from 'primeng/button';
 import { LoginComponent } from './pages/login/login.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card'
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 //admin dashboard
 import { SidebarModule } from 'primeng/sidebar';
@@ -43,6 +43,8 @@ import { UserService } from './services/user-management/user.service';
 import { CmSidebarComponent } from './pages/content-manager/cm-sidebar/cm-sidebar.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { CmDashboardComponent } from './pages/content-manager/cm-dashboard/cm-dashboard.component';
+// import { JwtInterceptor } from '@auth0/angular-jwt';
+import { JwtInterceptor } from './jwt.interceptor';
 
 
 @NgModule({
@@ -89,7 +91,15 @@ import { CmDashboardComponent } from './pages/content-manager/cm-dashboard/cm-da
    DragDropModule,
 
   ],
-  providers: [MessageService, UserService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+    MessageService,
+    UserService
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

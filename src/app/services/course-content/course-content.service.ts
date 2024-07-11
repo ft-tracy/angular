@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 })
 export class CourseContentService {
 
-  private videoUrl = 'https://e68c-41-90-101-26.ngrok-free.app';
-  private readingUrl = 'https://e68c-41-90-101-26.ngrok-free.app';
-  private quizUrl = 'https://e68c-41-90-101-26.ngrok-free.app';
+  private videoUrl = 'https://7120-41-90-101-26.ngrok-free.app';
+  private readingUrl = 'https://7120-41-90-101-26.ngrok-free.app';
+  private quizUrl = 'https://7120-41-90-101-26.ngrok-free.app';
 
   constructor(private http: HttpClient) { }
 

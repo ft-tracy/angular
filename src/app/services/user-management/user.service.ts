@@ -9,11 +9,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'  
 })
 export class UserService {
-  private getUserUrl = 'https://e68c-41-90-101-26.ngrok-free.app'; 
-  private addUserUrl = 'https://e68c-41-90-101-26.ngrok-free.app'; 
-  private updateUserUrl = 'https://e68c-41-90-101-26.ngrok-free.app'; 
-  private deleteUserUrl = 'https://e68c-41-90-101-26.ngrok-free.app';
-  private getUserIDUrl = 'https://e68c-41-90-101-26.ngrok-free.app'; 
+  private getUserUrl = 'https://7120-41-90-101-26.ngrok-free.app'; 
+  private addUserUrl = 'https://7120-41-90-101-26.ngrok-free.app'; 
+  private updateUserUrl = 'https://7120-41-90-101-26.ngrok-free.app'; 
+  private deleteUserUrl = 'https://7120-41-90-101-26.ngrok-free.app';
+  private getUserIDUrl = 'https://7120-41-90-101-26.ngrok-free.app'; 
 
   
   constructor(private http: HttpClient) {}

@@ -1,9 +1,9 @@
+// login.component.ts
+
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -37,21 +37,21 @@ export class LoginComponent {
       
       this.authService.login(email, password, "/api/Account/Login").subscribe(response => {
         if (response) {
-
-          if(this.authService.isFirstLogin())
-             {
+          if(this.authService.isFirstLogin()){
             this.router.navigate(['/reset-password']);
           } else {
-            const role = this.authService.getUserRole();
+            const role = response.role;
             if (role === 'Admin') {
-              this.router.navigate(['/admin/dashboard']);
+              this.router.navigate(['admin-dashboard']);
             } else if (role === 'ContentManager') {
-              this.router.navigate(['/content-manager/dashboard']);
+              this.router.navigate(['cm-dashboard']);
             }
           }
         } else {
           console.log("Login error");
         }
+      }, error => {
+        console.error("Login error:", error);
       });
     }
   }

@@ -4,9 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './pages/landing/landing.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { LoginComponent } from './pages/login/login.component';
-import { AdminComponent } from './pages/admin/admin.component';
-import { ContentManagerComponent } from './pages/content-manager/content-manager.component';
-import { authGuard } from './guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { CreateCourseComponent } from './pages/content-manager/create-course/create-course.component';
 import { CourseListComponent } from './pages/content-manager/course-list/course-list.component';
 import { AddCourseMaterialsComponent } from './pages/content-manager/add-course-materials/add-course-materials/add-course-materials.component';
@@ -15,6 +13,8 @@ import { AddUserComponent } from './pages/admin/user-management/add-user/add-use
 import { UpdateUserComponent } from './pages/admin/user-management/update-user/update-user.component';
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { CmSidebarComponent } from './pages/content-manager/cm-sidebar/cm-sidebar.component';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { CmDashboardComponent } from './pages/content-manager/cm-dashboard/cm-dashboard.component';
 
 
 
@@ -34,28 +34,38 @@ const routes: Routes = [
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
-    canActivate: [authGuard],
-    
+    canActivate: [AuthGuard],
   },
- 
   {
     path: 'sidebar',
     component: SidebarComponent,
   },
   {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
     path: 'view-users',
     component: ViewUsersComponent,
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'add-user',
     component: AddUserComponent,
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'update-user',
     component: UpdateUserComponent,
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'cm-dashboard',
+    component: CmDashboardComponent,
+    canActivate: [AuthGuard],
   },
 
   {
@@ -63,15 +73,15 @@ const routes: Routes = [
     component: CmSidebarComponent,
   },
   {
-    path: 'content-manager/create-course',
+    path: 'create-course',
     component: CreateCourseComponent,
   },
   {
-    path: 'content-manager/course-list',
+    path: 'course-list',
     component: CourseListComponent,
   },
   {
-    path: 'content-manager/course-content',
+    path: 'course-content',
     component: AddCourseMaterialsComponent,
   },
 

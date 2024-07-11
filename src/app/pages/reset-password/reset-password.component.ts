@@ -1,3 +1,5 @@
+// reset-password.component.ts
+
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { passwordMatchValidator } from '../../shared/password-match.directive';
@@ -8,7 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrl: './reset-password.component.scss'
+  styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent {
 
@@ -50,15 +52,10 @@ export class ResetPasswordComponent {
             this.router.navigate(['/login']);
           }else {
             console.log("Reset Password error");
-
-}
-  }
-    )
-    
-    
+          }
+        }, error => {
+          console.error("Reset Password error:", error);
+        });
+      }
     }
-
- 
-  }
-
 }
