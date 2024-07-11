@@ -1,5 +1,11 @@
 <!-- view-user.component.html -->
 
+<div class="flex">
+
+  <!-- <div class="sidebar-container">
+    <app-sidebar></app-sidebar>
+  </div> -->
+
 <div class="user-management">
     <div class="header">
       <h2>User Management</h2>
@@ -21,7 +27,7 @@
           <p>{{ user.firstName }} {{ user.lastName }}  <span class="invisible ">................</span>
             {{ user.role }} <span class="invisible ">.................</span>
           {{ user.email }}</p>
-          {{ user.documentId}}
+          <!-- {{ user.documentId}} -->
         </div>
         <button (click)="updateUser(user)" aria-label="Update User" pButton icon="pi pi-pencil"></button>
         <button (click)="confirmDeleteUser(user)" aria-label="Delete User" pButton icon="pi pi-trash"></button>     
@@ -29,16 +35,39 @@
         
       
     </div>
-  </div>
+
+ 
   
-  <!-- <p-dialog header="Confirm Delete" [(visible)]="displayDeleteDialog" [modal]="true" [closable]="false">
-    <p>To confirm, type "{{ deleteUser?.FirstName }} {{ deleteUser?.LastName }}" in the box below.</p>
-    <form [formGroup]="confirmDeleteForm">
-      <input type="text" formControlName="confirmDeleteText" />
-      <div class="dialog-actions">
-        <button (click)="deleteUserConfirmed()" [disabled]="confirmDeleteForm.get('confirmDeleteText')?.value !== deleteUser?.FirstName + ' ' + deleteUser?.LastName">Delete</button>
-        <button (click)="cancelDelete()">Cancel</button>
-      </div>
-    </form>
-  </p-dialog> -->
+
+<!-- <p-dialog header="Confirm Delete" [(visible)]="displayDeleteDialog" [modal]="true" [closable]="false">
+  <p>To confirm, type "{{ deleteUser?.firstName }} {{ deleteUser?.lastName }}" in the box below.</p>
+  <form [formGroup]="confirmDeleteForm">
+    <input type="text" formControlName="confirmDeleteText" />
+    <div class="dialog-actions">
+      <button type="button" (click)="deleteUserConfirmed()"
+        [disabled]="confirmDeleteForm.get('confirmDeleteText')?.value !== deleteUser?.firstName + ' ' + deleteUser?.lastName">
+        Remove User
+      </button>
+      <button type="button" (click)="cancelDelete()">Cancel</button>
+    </div>
+  </form>
+</p-dialog> -->
+
+<p-dialog header="Confirm Delete" [(visible)]="displayDeleteDialog" [modal]="true" [closable]="false">
+  <p>To confirm, type "{{ deleteUser?.firstName }} {{ deleteUser?.lastName }}" in the box below.</p>
+  <form [formGroup]="confirmDeleteForm">
+    <input type="text" formControlName="confirmDeleteText" />
+    <div class="dialog-actions">
+      <button (click)="deleteUserConfirmed()" [disabled]="confirmDeleteForm.get('confirmDeleteText')?.value !== deleteUser?.firstName + ' ' + deleteUser?.lastName">Delete</button>
+      <button (click)="cancelDelete()">Cancel</button>
+    </div>
+  </form>
+</p-dialog>
+
+
+
+</div>
+</div> 
+
+
   

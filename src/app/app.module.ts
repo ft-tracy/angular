@@ -15,7 +15,6 @@ import { CardModule } from 'primeng/card'
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 //admin dashboard
-import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { MenuModule } from 'primeng/menu';
 import { BadgeModule } from 'primeng/badge';
@@ -43,8 +42,13 @@ import { UserService } from './services/user-management/user.service';
 import { CmSidebarComponent } from './pages/content-manager/cm-sidebar/cm-sidebar.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { CmDashboardComponent } from './pages/content-manager/cm-dashboard/cm-dashboard.component';
-// import { JwtInterceptor } from '@auth0/angular-jwt';
 import { JwtInterceptor } from './jwt.interceptor';
+
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -70,7 +74,6 @@ import { JwtInterceptor } from './jwt.interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ButtonModule,
     CheckboxModule,
     InputTextModule,
     ReactiveFormsModule,
@@ -90,6 +93,11 @@ import { JwtInterceptor } from './jwt.interceptor';
 
    DragDropModule,
 
+   ConfirmPopupModule,
+   BrowserAnimationsModule,
+   ToastModule,
+   DialogModule,
+
   ],
   providers: [
     {
@@ -98,7 +106,8 @@ import { JwtInterceptor } from './jwt.interceptor';
       multi: true,
     },
     MessageService,
-    UserService
+    UserService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

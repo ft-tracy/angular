@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CourseDataService {
-  private createCourseUrl = 'https://7120-41-90-101-26.ngrok-free.app';
-  private getCourseUrl = 'https://7120-41-90-101-26.ngrok-free.app';
+  private createCourseUrl = 'https://3c16-41-90-101-26.ngrok-free.app';
+  private getCourseUrl = 'https://3c16-41-90-101-26.ngrok-free.app';
 
   constructor(private http: HttpClient) {}
 

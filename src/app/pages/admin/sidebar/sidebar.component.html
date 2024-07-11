@@ -17,16 +17,16 @@
         </div>
     
         <div class="sidebar-container__list"> 
-            <div class="sidebar-container__list__item">
-                <i class="pi pi-home" aria-hidden="true"></i>
+            <div class="sidebar-container__list__item" (click)="navigateToAdminDashboard()">
+                <i class="pi pi-clipboard" aria-hidden="true"></i>
                 <div class="sidebar-container__list__item__title">Dashboard</div>
             </div>
-            <div class="sidebar-container__list__item">
+            <div class="sidebar-container__list__item" (click)="navigateToViewUsers()">
                 <i class="pi pi-user-plus" aria-hidden="true"></i>
                 <div class="sidebar-container__list__item__title">User Management</div>
             </div>
           
-            <div class="sidebar-container__list__item">
+            <div class="sidebar-container__list__item" >
                 <i class="pi pi-chart-line" aria-hidden="true"></i>
                 <div class="sidebar-container__list__item__title">Trainee Progress</div>
             </div>
@@ -34,8 +34,8 @@
                 <i class="pi pi-chart-line" aria-hidden="true"></i>
                 <div class="sidebar-container__list__item__title">Guest Trainee Progress</div>
             </div>
-            <div class="sidebar-container__list__item">
-                <i class="pi pi-graduation-cap" aria-hidden="true"></i>
+            <div class="sidebar-container__list__item" (click)="navigateToCourseList()">
+                <i class="pi pi-graduation-cap" aria-hidden="true" ></i>
                 <div class="sidebar-container__list__item__title">Existing Courses</div>
             </div>
             <div class="sidebar-container__list__item">

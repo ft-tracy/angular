@@ -1,4 +1,8 @@
 <!-- update-user.component.html -->
+<div class="sidebar-container">
+  <!-- Include the sidebar component here -->
+  <app-sidebar></app-sidebar>
+</div>
 
 <form (ngSubmit)="saveChanges()" [formGroup]="updateUserForm" class="update-user-form">
   <div class="form-group">
@@ -16,9 +20,9 @@
   <div class="form-group">
     <label for="role">Role:</label>
     <select id="role" formControlName="role">
-      <!-- <option value="Admin">Admin</option> -->
       <option value="ContentManager">Content Manager</option>
       <option value="Trainee">Trainee</option>
+      <!-- <option value="Guest">Guest</option> -->
     </select>
   </div>
  

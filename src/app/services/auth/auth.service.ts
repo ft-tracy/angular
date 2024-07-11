@@ -10,8 +10,8 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = 'https://7120-41-90-101-26.ngrok-free.app'; 
-  private resetPasswordUrl = 'https://7120-41-90-101-26.ngrok-free.app';
+  private loginUrl = 'https://3c16-41-90-101-26.ngrok-free.app'; 
+  private resetPasswordUrl = 'https://3c16-41-90-101-26.ngrok-free.app';
   private role: string | null = null;
   
   

@@ -2,6 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,6 +13,12 @@ import { MenuItem } from 'primeng/api';
 
 export class CmSidebarComponent implements OnInit
 {
+  constructor(private router: Router) {}
+
+  navigateToCourseList(): void {
+    this.router.navigate(['/course-list']);
+  }
+
   items:MenuItem[] | undefined;
 
   ngOnInit() {

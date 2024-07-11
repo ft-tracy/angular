@@ -47,7 +47,7 @@ $primary-color-light: lighten($primary-color, 15%);
     &__item {
       display: flex;
       align-items: center;
-      padding: 10px 0;
+      padding: 30px 0;
       cursor: pointer;
       transition: background-color 0.3s;
 
@@ -61,7 +61,7 @@ $primary-color-light: lighten($primary-color, 15%);
       }
 
       &__title {
-        font-size: 5em;
+        font-size: 1em;
       }
     }
   }

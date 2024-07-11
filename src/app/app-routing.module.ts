@@ -75,14 +75,18 @@ const routes: Routes = [
   {
     path: 'create-course',
     component: CreateCourseComponent,
+    canActivate: [AuthGuard],
+
   },
   {
     path: 'course-list',
     component: CourseListComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'course-content',
     component: AddCourseMaterialsComponent,
+    canActivate: [AuthGuard],
   },
 
   

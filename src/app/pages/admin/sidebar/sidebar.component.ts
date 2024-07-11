@@ -1,6 +1,7 @@
 // sidebar.component.ts 
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,7 +11,23 @@ import { MenuItem } from 'primeng/api';
 })
 
 export class SidebarComponent implements OnInit
+
 {
+  constructor(private router: Router) {}
+
+  navigateToAdminDashboard(): void {
+    this.router.navigate(['/admin-dashboard']);
+  }
+
+  navigateToViewUsers(): void {
+    this.router.navigate(['/view-users']);
+  }
+
+  navigateToCourseList(): void {
+    this.router.navigate(['/course-list']);
+  }
+  
+
   items:MenuItem[] | undefined;
 
   ngOnInit() {
