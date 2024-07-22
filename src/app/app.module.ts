@@ -49,7 +49,10 @@ import { ConfirmationService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { UpdateCourseDataComponent } from './pages/content-manager/course-data-management/update-course-data/update-course-data.component';
 
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,8 @@ import { ToastModule } from 'primeng/toast';
     CmSidebarComponent,
     AdminDashboardComponent,
     CmDashboardComponent,
+    ForgotPasswordComponent,
+    UpdateCourseDataComponent,
 
   ],
   imports: [
@@ -97,6 +102,7 @@ import { ToastModule } from 'primeng/toast';
    BrowserAnimationsModule,
    ToastModule,
    DialogModule,
+   ProgressSpinnerModule,
 
   ],
   providers: [

@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { passwordMatchValidator } from '../../shared/password-match.directive';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
-
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-reset-password',
@@ -27,7 +27,8 @@ export class ResetPasswordComponent {
   constructor (
     private fb : FormBuilder,
     private authService : AuthService,
-    private router : Router
+    private router : Router,
+    private messageService: MessageService,
 
   ) {}
   get Email (){
@@ -46,14 +47,17 @@ export class ResetPasswordComponent {
       const NewPassword = this.resetPasswordForm.value.NewPassword || '';
       const ConfirmPassword = this.resetPasswordForm.value.ConfirmPassword || '';
     
-      this.authService.resetPassword(email, NewPassword, ConfirmPassword, "api/Account/ResetPassword").subscribe(response => {
+      this.authService.resetPassword(email, NewPassword, ConfirmPassword, "/api/Account/ResetPassword").subscribe(response => {
         
           if (response.message === "Password reset successful."){
+            this.messageService.add({severity:'success', summary: 'Success', detail: 'Password reset successful'});
             this.router.navigate(['/login']);
           }else {
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Reset Password error'});
             console.log("Reset Password error");
           }
         }, error => {
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Reset Password error'});
           console.error("Reset Password error:", error);
         });
       }

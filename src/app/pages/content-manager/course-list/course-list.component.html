@@ -1,49 +1,76 @@
 <!-- course-list.component.html -->
-
-<div class="flex">
-<!-- <div class="sidebar-container">
-  <app-sidebar></app-sidebar>
-</div> -->
-
 <div class="course-list">
   <div class="header">
-    <h3>Existing Courses</h3>
+    <h2>Existing Courses</h2>
   </div>
 
   <div class="add-course-button">
     <button type="button" (click)="createNewCourse()" aria-label="Add New Course" pButton label="Create New Course"></button>
   </div>
 
-  <div *ngIf="courses.length === 0">
-    <h3>No courses have been created.</h3>
+  <!-- Show loading spinner when loading is true -->
+  <div *ngIf="loading" class="spinner-container">
+    <p-progressSpinner></p-progressSpinner>
   </div>
+
+  <!-- <div *ngIf="courses.length === 0">
+    <h3>No courses have been created.</h3>
+  </div> -->
 
   <div *ngIf="courses.length > 0">
     <div *ngFor="let course of courses" class="course-item">
       <div class="course-header">
         <div>
           <h4>{{ course.courseTitle }}</h4>
-          <BR>
+          <button (click)="updateCourseData(course)" aria-label="Update Course" pButton icon="pi pi-pencil"></button>
+          <button (click)="confirmDeleteCourse(course)" aria-label="Delete Course" pButton icon="pi pi-trash"></button>
+          <br>
           <p>{{ course.courseDescription }}</p>
         </div>
       </div>
-
 
       <div class="course-tags">
         <span *ngFor="let tag of course.courseTags">{{ tag }}</span>
       </div>
 
-      <BR>
+      <br>
 
+     
       <div class="course-modules">
         <ol>
-          <li *ngFor="let module of course.courseModules">
-            <a (click)="goToAddCourseMaterials(course.courseTitle, module)" title="add training materials to module">{{ module }}</a>
-            <span class="tooltip">add training materials to module</span>
+          <li *ngFor="let module of course.modules">
+            <a (click)="goToAddCourseMaterials(course.courseTitle, module.moduleName)" title="Add training materials">{{ module.moduleName }}</a>
           </li>
         </ol>
       </div>
+
+      
     </div>
   </div>
 </div>
-</div>
+
+
+<p-dialog header="Confirm Delete" [(visible)]="displayDeleteCourseDialog" [modal]="true" [closable]="false">
+  <p>To confirm, type "{{ deleteCourse?.courseTitle }}" in the box below.</p>
+  <form [formGroup]="confirmDeleteCourseForm">
+    <input type="text" formControlName="confirmDeleteCourseText" /> <br><br>
+    <div class="dialog-actions">
+      <button (click)="deleteCourseConfirmed()" [disabled]="confirmDeleteCourseForm.get('confirmDeleteCourseText')?.value !== deleteCourse?.courseTitle">Delete Course</button> 
+      <button style="margin-left: 0;" (click)="cancelDeleteCourse()">Cancel</button>
+    </div>
+  </form>
+</p-dialog>
+
+<!-- Confirmation Dialog for Deletion of Module -->
+<p-dialog header="Confirm Delete" [(visible)]="displayDeleteModuleDialog" [modal]="true" [closable]="false">
+  <p>To confirm, type the module name in the box below.</p>
+  <form [formGroup]="confirmDeleteModuleForm">
+    <input type="text" formControlName="confirmDeleteText" />
+    <div class="dialog-actions">
+      <button (click)="deleteModuleConfirmed()" [disabled]="confirmDeleteModuleForm.get('confirmDeleteText')?.value !== deleteModule?.name">Delete Module</button>
+      <button (click)="cancelDeleteModule()">Cancel</button>
+    </div>
+  </form>
+</p-dialog>
+
+

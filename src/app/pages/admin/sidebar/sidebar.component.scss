@@ -3,7 +3,7 @@
 // sidebar.component.scss
 
 // Define color variables
-$primary-color: #001f3f; // Navy Blue
+$primary-color: #01284e; // Navy Blue
 $accent-color: #ff6600; // Burnt Orange
 $background-color: #a7a7bb;
 $input-border-color: #ccc;
@@ -25,20 +25,31 @@ $primary-color-light: lighten($primary-color, 15%);
   left: 0;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+
 
   &__header {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 
+
+
     &__logo {
       margin-right: 10px;
     }
 
     &__brand {
+      position: relative;
       font-size: 1.5em;
       font-weight: bold;
       color: #ffffff;
+      
+      h3{
+        color: #ffffff;
+      }
+
+
     }
   }
 
@@ -53,7 +64,9 @@ $primary-color-light: lighten($primary-color, 15%);
       transition: background-color 0.3s;
       
       &:hover {
-        background-color: darken($primary-color, 10%);
+        background-color: darken($primary-color, 5%);
+        transition: background-color 0.3s;
+        border-radius: 10px;
       }
 
       i {
@@ -64,6 +77,7 @@ $primary-color-light: lighten($primary-color, 15%);
       &__title {
         font-size: 1em;
       }
+
     }
   }
 
@@ -88,5 +102,37 @@ $primary-color-light: lighten($primary-color, 15%);
       }
     }
   }
+
+  .sidebar-submenu{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+  }
+
+  .sidebar-submenu__item {
+    padding: 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: #f0f0f0;
+  }
+
+  &.visible {
+    display: block;
+}
+}
+
+.sidebar-submenu__item:hover {
+    background-color: #f0f0f0;
+}
+
+.sidebar-submenu.visible {
+    display: block;
+}
 }
 

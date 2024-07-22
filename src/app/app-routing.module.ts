@@ -2,9 +2,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './pages/landing/landing.component';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { LoginComponent } from './pages/login/login.component';
-import { AuthGuard } from './guards/auth.guard';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+// import { AuthGuard } from './guards/auth.guard';
 import { CreateCourseComponent } from './pages/content-manager/create-course/create-course.component';
 import { CourseListComponent } from './pages/content-manager/course-list/course-list.component';
 import { AddCourseMaterialsComponent } from './pages/content-manager/add-course-materials/add-course-materials/add-course-materials.component';
@@ -15,7 +16,7 @@ import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { CmSidebarComponent } from './pages/content-manager/cm-sidebar/cm-sidebar.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { CmDashboardComponent } from './pages/content-manager/cm-dashboard/cm-dashboard.component';
-
+import { UpdateCourseDataComponent } from './pages/content-manager/course-data-management/update-course-data/update-course-data.component';
 
 
 
@@ -34,7 +35,12 @@ const routes: Routes = [
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+    // canActivate: [AuthGuard],
   },
   {
     path: 'sidebar',
@@ -43,29 +49,29 @@ const routes: Routes = [
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
 
   {
     path: 'view-users',
     component: ViewUsersComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'add-user',
     component: AddUserComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'update-user',
     component: UpdateUserComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
 
   {
     path: 'cm-dashboard',
     component: CmDashboardComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
 
   {
@@ -75,18 +81,24 @@ const routes: Routes = [
   {
     path: 'create-course',
     component: CreateCourseComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
+
+  },
+  {
+    path: 'update-course-data',
+    component: UpdateCourseDataComponent,
+    // canActivate: [AuthGuard],
 
   },
   {
     path: 'course-list',
     component: CourseListComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'course-content',
     component: AddCourseMaterialsComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
 
   

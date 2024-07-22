@@ -1,3 +1,5 @@
+// view-users.component.scss
+
 // Define color variables
 $primary-color: #001f3f; // Navy Blue
 $accent-color: #ff6600; // Burnt Orange
@@ -9,14 +11,33 @@ $text-color: #ffffff;
 $accent-color-light: lighten($accent-color, 15%);
 $primary-color-light: lighten($primary-color, 15%);
 
+
+.layout-wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+.flex {
+  display: flex;
+  flex-grow: 1;
+}
+
+.sidebar-container {
+  width: 250px;
+  background-color: #001f3f; // Navy Blue
+  color: #ffffff; // White
+}
+
 .user-management {
+  flex-grow: 1;
+  // margin-left: 250px;
   width: 800px;
-  margin: 0 auto;
+  // margin: 0 auto;
   padding: 20px;
   background-color: $background-color;
   border: 1px solid $input-border-color;
   border-radius: 5px;
-  max-height: 100vh;
+  // max-height: 100vh;
   overflow-y: auto;
 
   .header {
@@ -31,8 +52,18 @@ $primary-color-light: lighten($primary-color, 15%);
 
     h2 {
       margin: 0;
+      color: white;
     }
   }
+
+  /* course-list.component.scss */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Adjust height as needed */
+}
+
 
   .add-user-button {
     display: flex;

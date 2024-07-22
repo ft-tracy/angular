@@ -1,5 +1,6 @@
 // course-list.component.scss
 
+@import "primeicons/primeicons.css";
 // Define color variables
 $primary-color: #001f3f; // Navy Blue
 $accent-color: #ff6600; // Burnt Orange
@@ -32,9 +33,17 @@ $primary-color-light: lighten($primary-color, 15%);
     display: flex;
     justify-content: center;
 
-    h3 {
+    h2 {
       margin: 0;
+      color: white;
     }
+  }
+
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust height as needed */
   }
 
   .course-item {

@@ -1,8 +1,11 @@
 // sidebar.component.ts 
+
+
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
-
+import { AuthService } from '../../../services/auth/auth.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,10 +13,15 @@ import { Router } from '@angular/router';
   styleUrl: './sidebar.component.scss'
 })
 
-export class SidebarComponent implements OnInit
+export class SidebarComponent implements OnInit {
 
-{
-  constructor(private router: Router) {}
+  submenuVisible: boolean= false;
+  
+  constructor(
+    private router: Router, 
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   navigateToAdminDashboard(): void {
     this.router.navigate(['/admin-dashboard']);
@@ -26,7 +34,24 @@ export class SidebarComponent implements OnInit
   navigateToCourseList(): void {
     this.router.navigate(['/course-list']);
   }
+
+  showSubmenu(): void {
+    console.log('showSubmenu() called');
+    this.submenuVisible = true;
+    this.cdr.detectChanges();
+  }
+
+  hideSubmenu(): void {
+    console.log('hideSubmenu() called');
+    this.submenuVisible = false;
+    this.cdr.detectChanges();
+  }
   
+  logout(): void {
+    console.log('Logout function called');
+    this.authService.logout();
+    this.cdr.markForCheck();
+  }
 
   items:MenuItem[] | undefined;
 
@@ -48,14 +73,11 @@ export class SidebarComponent implements OnInit
         items : [{
           label : 'Add New User',
           icon : 'pi pi-plus'
-          //avatar, name, email,set role
         },
         {
           label :' View Existing Users',
           icon : 'pi pi-eye'
-          //avatar, name, email, role
-          //filter by role
-          //search bar
+          
 
         },
         {
@@ -79,15 +101,11 @@ export class SidebarComponent implements OnInit
        items : [{
          label : 'Trainee progress',
          icon : 'pi pi-eye'
-         //avatar, name, email,set role
        },
        {
          label :'Guest Trainee Progress',
          icon : 'pi pi-eye'
-         //avatar, name, email, role
-         //filter by role
-         //search bar
-
+      
        },
     
       ]
@@ -110,6 +128,7 @@ export class SidebarComponent implements OnInit
           {
             label: 'Logout',
             icon: 'pi pi-sign-out',
+            command: () => this.logout()
           }
       ]
     },

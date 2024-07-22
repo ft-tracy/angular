@@ -38,6 +38,9 @@ $primary-color-light: lighten($primary-color, 15%);
       font-size: 1.5em;
       font-weight: bold;
       color: $text-color!important;
+      h3{
+        color: #ffffff;
+      }
     }
   }
 
@@ -47,12 +50,15 @@ $primary-color-light: lighten($primary-color, 15%);
     &__item {
       display: flex;
       align-items: center;
-      padding: 30px 0;
+      padding: 35px 0;
       cursor: pointer;
       transition: background-color 0.3s;
 
       &:hover {
-        background-color: darken($primary-color, 10%);
+        background-color: darken($primary-color, 5%);
+        transition: background-color 0.3s;
+        border-radius: 10px;
+        
       }
 
       i {

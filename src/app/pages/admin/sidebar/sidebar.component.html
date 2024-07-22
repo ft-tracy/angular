@@ -12,35 +12,46 @@
     <div class="sidebar-container">
         <div class="sidebar-container__header">
             <div class="sidebar-container__header__logo">
-                <div class="sidebar-container__header__brand"><h3>OrientPro</h3></div>
+                <div class="sidebar-container__header__brand">
+                    <h3>OrientPro</h3>
+                </div>
             </div>
         </div>
     
         <div class="sidebar-container__list"> 
             <div class="sidebar-container__list__item" (click)="navigateToAdminDashboard()">
+                <span class="invisible">.....</span>
                 <i class="pi pi-clipboard" aria-hidden="true"></i>
                 <div class="sidebar-container__list__item__title">Dashboard</div>
             </div>
             <div class="sidebar-container__list__item" (click)="navigateToViewUsers()">
+                <span class="invisible">.....</span>
                 <i class="pi pi-user-plus" aria-hidden="true"></i>
                 <div class="sidebar-container__list__item__title">User Management</div>
             </div>
           
             <div class="sidebar-container__list__item" >
+                <span class="invisible">.....</span>
                 <i class="pi pi-chart-line" aria-hidden="true"></i>
                 <div class="sidebar-container__list__item__title">Trainee Progress</div>
             </div>
             <div class="sidebar-container__list__item">
+                <span class="invisible">.....</span>
                 <i class="pi pi-chart-line" aria-hidden="true"></i>
                 <div class="sidebar-container__list__item__title">Guest Trainee Progress</div>
             </div>
             <div class="sidebar-container__list__item" (click)="navigateToCourseList()">
+                <span class="invisible">.....</span>
                 <i class="pi pi-graduation-cap" aria-hidden="true" ></i>
                 <div class="sidebar-container__list__item__title">Existing Courses</div>
             </div>
-            <div class="sidebar-container__list__item">
+            <div class="sidebar-container__list__item" (mouseover)="showSubmenu()" (mouseleave)="hideSubmenu()">
+                <span class="invisible">.....</span>
                 <i class="pi pi-cog" aria-hidden="true"></i>
                 <div class="sidebar-container__list__item__title">Account Settings</div>
+                <div class="sidebar-submenu" [class.visible]="submenuVisible">
+                    <div class="sidebar-submenu__item" (click)="logout()">Logout</div>
+                </div>
             </div>
         </div>
 

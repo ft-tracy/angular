@@ -1,0 +1,79 @@
+@import "primeicons/primeicons.css";
+
+// Define color variables
+$primary-color: #001f3f; // Navy Blue
+$accent-color: #ff6600; // Burnt Orange
+$background-color: #a7a7bb;
+$input-border-color: #ccc;
+$input-focus-border-color: $primary-color;
+$label-color: #001f3f;
+$text-color: #ffffff;
+$accent-color-light: lighten($accent-color, 15%);
+$primary-color-light: lighten($primary-color, 15%);
+
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+
+.content {
+  flex: 1;
+  margin-left: 250px;
+  padding: 20px;
+  background-color: $background-color;
+  color: $text-color;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
+
+  .analytics-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+
+    .card {
+      background-color: $primary-color-light;
+      border-radius: 5px;
+      padding: 20px;
+      width: 30%;
+      text-align: center;
+
+      @media (max-width: 768px) {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        color: $accent-color;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1.2em;
+        margin: 5px 0;
+      }
+    }
+  }
+
+  .chart-container {
+    background-color: $primary-color-light;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+
+    h2 {
+      color: $accent-color;
+      margin-bottom: 20px;
+    }
+  }
+}

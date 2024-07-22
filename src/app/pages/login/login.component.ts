@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { MessageService } from 'primeng/api';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +20,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService,
   ) { }
 
   get email() {
@@ -35,29 +38,33 @@ export class LoginComponent {
       const password = this.loginForm.value.password || '';
 
       
-      this.authService.login(email, password, "/api/Account/Login").subscribe(response => {
+    this.authService.login(email, password, "/api/Account/Login").subscribe(response => {
         if (response) {
           if(this.authService.isFirstLogin()){
+            localStorage.setItem("isFirstLogin", "true")
             this.router.navigate(['/reset-password']);
           } else {
             const role = response.role;
+            this.messageService.add({severity:'success', summary: 'Success', detail: 'Login successful'});
             if (role === 'Admin') {
-              this.router.navigate(['admin-dashboard']);
+              this.router.navigate(['/admin-dashboard']);
             } else if (role === 'ContentManager') {
-              this.router.navigate(['cm-dashboard']);
+              this.router.navigate(['/cm-dashboard']);
             }
           }
         } else {
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Invalid email or password'});
           console.log("Login error");
         }
       }, error => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error during login, please try again'});
         console.error("Login error:", error);
       });
     }
   }
 
-  navigateToResetPassword(): void {
-    this.router.navigate(['/reset-password']);
+  navigateToForgotPassword(): void {
+    this.router.navigate(['/forgot-password']);
   }
 }
 

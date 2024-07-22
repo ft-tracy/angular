@@ -6,7 +6,7 @@ $background-color: #a7a7bb;
 $input-border-color: #ccc;
 $input-focus-border-color: $primary-color;
 $label-color: #001f3f;
-$text-color: #ffffff; 
+$text-color: $primary-color; 
 
 
 
@@ -32,6 +32,7 @@ form {
 
     h3 {
       margin: 0;
+      color: white;
     }
   }
 

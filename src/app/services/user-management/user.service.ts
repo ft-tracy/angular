@@ -9,11 +9,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'  
 })
 export class UserService {
-  private getUserUrl = 'https://3c16-41-90-101-26.ngrok-free.app'; 
-  private addUserUrl = 'https://3c16-41-90-101-26.ngrok-free.app'; 
-  private updateUserUrl = 'https://3c16-41-90-101-26.ngrok-free.app'; 
-  private deleteUserUrl = 'https://3c16-41-90-101-26.ngrok-free.app';
-  private getUserIDUrl = 'https://3c16-41-90-101-26.ngrok-free.app'; 
+  private getUserUrl = 'https://9a64-105-163-0-234.ngrok-free.app'; 
+  private addUserUrl = 'https://9a64-105-163-0-234.ngrok-free.app'; 
+  private updateUserUrl = 'https://9a64-105-163-0-234.ngrok-free.app'; 
+  private deleteUserUrl = 'https://9a64-105-163-0-234.ngrok-free.app';
+  private getUserIDUrl = 'https://9a64-105-163-0-234.ngrok-free.app'; 
 
   
   constructor(private http: HttpClient) {}
@@ -33,12 +33,6 @@ export class UserService {
     return this.http.put<any>(`${this.updateUserUrl}/api/Admin/UpdateUser/${documentId}`, user, { headers });
   }
 
-  // deleteUser(documentId: string, user: any): Observable<any> {
-  //   const headers = new HttpHeaders({"ngrok-skip-browser-warning": ""});
-  //   return this.http.delete<void>(`${this.deleteUserUrl}/api/Admin/DeleteUser/{documentId}`, user, {headers});
-  // }
-
-  // user.service.ts
   deleteUser(documentId: string): Observable<void> {
     return this.http.delete<void>(`${this.deleteUserUrl}/api/Admin/DeleteUser/${documentId}`);
   }

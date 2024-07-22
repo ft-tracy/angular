@@ -3,7 +3,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../../../services/user-management/user.service';
-import { User } from '../../../../services/user-management/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmPopup } from 'primeng/confirmpopup';
@@ -20,13 +19,14 @@ export class ViewUsersComponent implements OnInit {
   deleteUser: any;
   confirmDeleteForm: FormGroup;
 
+  loading : boolean =true;
+
   @ViewChild('confirmPopup') confirmPopup!: ConfirmPopup;
 
   constructor(
     private userService: UserService,
     private router: Router,
     private fb: FormBuilder,
-    private confirmationService: ConfirmationService,
     private messageService : MessageService,
     ) {
       this.confirmDeleteForm = this.fb.group({
@@ -39,12 +39,15 @@ export class ViewUsersComponent implements OnInit {
   }
 
   getUsers() {
+    this.loading = true;
     this.userService.getUsers().subscribe(
     (data) => {
       this.users = data;
       console.log(data);
+      this.loading = false;
     }, (error) => {
       console.error('Error loading users: ', error);
+      this.loading = false;
     }
     );
   }
@@ -73,15 +76,6 @@ export class ViewUsersComponent implements OnInit {
     this.displayDeleteDialog = true;
   }
 
-
-  // deleteUserConfirmed(): void {
-  //   if (this.confirmDeleteForm.get('confirmDeleteText')?.value === `${this.deleteUser.firstName} ${this.deleteUser.lastName}`) {
-  //     this.userService.deleteUser(this.deleteUser.documentId).subscribe(() => {
-  //       this.getUsers();
-  //       this.displayDeleteDialog = false;
-  //     });
-  //   }
-  // }
 
   deleteUserConfirmed(): void {
     if (this.confirmDeleteForm.get('confirmDeleteText')?.value === `${this.deleteUser.firstName} ${this.deleteUser.lastName}`) {

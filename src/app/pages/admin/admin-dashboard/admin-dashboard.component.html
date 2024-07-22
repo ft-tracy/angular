@@ -1,6 +1,28 @@
 <!-- admin-dashboard.component.html -->
-<div>
-    <p>admin-dashboard works!</p>
-    <app-sidebar></app-sidebar>
-    <!-- Add the content of your Admin Dashboard here -->
+<div class="dashboard-container">
+  <app-sidebar></app-sidebar>
+  <div class="content">
+    <div class="analytics-cards">
+      <div class="card">
+        <h2>Completed Courses</h2>
+        <p>{{completedCourses}} / {{totalEnrolledCourses}}</p>
+        <p>{{getCompletedCoursesPercentage() | number:'1.0-2'}}%</p>
+      </div>
+      <div class="card">
+        <h2>In Progress Courses</h2>
+        <p>{{inProgressCourses}} / {{totalEnrolledCourses}}</p>
+        <p>{{getInProgressCoursesPercentage() | number:'1.0-2'}}%</p>
+      </div>
+      <div class="card">
+        <h2>Not Started Courses</h2>
+        <p>{{notStartedCourses}} / {{totalEnrolledCourses}}</p>
+        <p>{{getNotStartedCoursesPercentage() | number:'1.0-2'}}%</p>
+      </div>
+    </div>
+    <div class="chart-container">
+      <h2>Quiz Score Ranges</h2>
+      <canvas id="quizScoreChart"></canvas>
+    </div>
   </div>
+</div>
+
