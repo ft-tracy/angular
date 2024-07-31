@@ -19,6 +19,10 @@ export class CmSidebarComponent implements OnInit
     this.router.navigate(['/course-list']);
   }
 
+  navigateToTrackProgress() : void {
+    this.router.navigate(['/track-progress']);
+  }
+
   items:MenuItem[] | undefined;
 
   ngOnInit() {

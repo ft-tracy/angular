@@ -1,5 +1,6 @@
 <!-- course-list.component.html -->
 <div class="course-list">
+  <app-sidebar></app-sidebar>
   <div class="header">
     <h2>Existing Courses</h2>
   </div>
@@ -39,7 +40,12 @@
       <div class="course-modules">
         <ol>
           <li *ngFor="let module of course.modules">
-            <a (click)="goToAddCourseMaterials(course.courseTitle, module.moduleName)" title="Add training materials">{{ module.moduleName }}</a>
+            {{ module.moduleName }}
+            <span class="invisible">................................................................</span>            
+            <button class="button"  (click)="goToAddCourseMaterials(course.courseTitle, module.moduleName)" pButton icon="pi pi-plus-circle"></button>
+            <button  class="button" (click)="goToUpdateCourseMaterials(course.courseTitle, module.moduleName, module.moduleId)" pButton icon="pi pi-pencil"></button>
+            <button  class="button"  (click)="confirmDeleteModule(module)" pButton icon="pi pi-trash"></button>
+            
           </li>
         </ol>
       </div>

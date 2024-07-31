@@ -92,7 +92,7 @@ $error-color: darken($background-color, 30%);
       border-radius: 3px;
       outline: none;
       transition: border-color 0.3s;
-      color: $text-color;
+      color: $primary-color;
 
       &:focus {
         border-color: $input-focus-border-color;
@@ -191,6 +191,14 @@ $error-color: darken($background-color, 30%);
       border-radius: 3px;
       padding: 10px;
       color: $text-color;
+    }
+    .text-area-vid-desc {
+      width: 100%;
+      border: 1px solid $input-border-color;
+      border-radius: 3px;
+      padding: 10px;
+      color: $primary-color;
+
     }
   }
 

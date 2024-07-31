@@ -8,49 +8,57 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CourseDataService {
-  private createCourseUrl = 'https://9a64-105-163-0-234.ngrok-free.app';
-  private getCourseUrl = 'https://9a64-105-163-0-234.ngrok-free.app';
-  private deleteCourseUrl = 'https://9a64-105-163-0-234.ngrok-free.app';
-  private updateCourseUrl = 'https://9a64-105-163-0-234.ngrok-free.app';
+  private baseUrl = 'https://orientproservice-1.onrender.com';
   
 
   constructor(private http: HttpClient) {}
 
   createCourse(courseData: FormData): Observable<any> {
-    return this.http.post(`${this.createCourseUrl}/Courses/CreateCourse`, courseData);
+    return this.http.post(`${this.baseUrl}/Courses/CreateCourse`, courseData);
   }
   
   getCourses(): Observable<any[]> {
     var headers = new HttpHeaders({"ngrok-skip-browser-warning": "69420"})
 
-    return this.http.get<any[]>(`${this.getCourseUrl}/Courses/GetCourses`, {headers:headers});
+    return this.http.get<any[]>(`${this.baseUrl}/Courses/GetCourses`, {headers:headers});
   }
 
   deleteCourse(id: string): Observable <void> {
-    return this.http.delete<void>(`${this.deleteCourseUrl}/Courses/DeleteCourse/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/Courses/DeleteCourse/${id}`);
   }
 
+
+  // updateCourse(id: string, courseData: FormData): Observable<any> {
+  //   const headers = new HttpHeaders({"ngrok-skip-browser-warning": ""});
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json'
+  //     })
+  //   };
+  //   return this.http.put<any>(`${this.baseUrl}/Courses/EditCourse/${id}`, courseData, {headers});
+  // }
 
   updateCourse(id: string, courseData: FormData): Observable<any> {
     const headers = new HttpHeaders({"ngrok-skip-browser-warning": ""});
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    return this.http.put<any>(`${this.updateCourseUrl}/Courses/EditCourse/${id}`, courseData, {headers});
+    return this.http.put<any>(`${this.baseUrl}/Courses/EditCourse/${id}`, courseData, { headers });
   }
   
-  editModule(module: any) {
-    return this.http.put(`/api/Modules/EditExistingModule/${module.moduleId}`, module);
+  editModule(module: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('moduleId', module.moduleId);
+    formData.append('title', module.moduleName);  // Change moduleName to title as expected by the backend
+  
+    return this.http.put(`${this.baseUrl}/api/Modules/EditExistingModule/${module.moduleId}`, formData);
+  }
+  
+  
+
+  deleteModule(moduleId: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/api/Modules/DeleteModule/${moduleId}`);
   }
 
-  deleteModule(moduleId: string) {
-    return this.http.delete(`/api/Modules/DeleteModule/${moduleId}`);
-  }
-
-  addModule(module: any) {
-    return this.http.post(`/api/Modules/AddNewModule/${module.courseId}`, module);
+  addModule(module: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/Modules/AddNewModule/${module.courseId}`,  { courseId: module.courseId, title: module.title });
   }
 
 }

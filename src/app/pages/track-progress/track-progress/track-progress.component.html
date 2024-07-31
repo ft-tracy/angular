@@ -1,0 +1,27 @@
+<!-- track-progress,component.html -->
+
+
+<div class="filter-container">
+  <label for="filter">Filter: </label>
+  <select [formControl]="filterControl" id="filter">
+    <option value="ALL">All</option>
+    <option value="TRAINEES">Trainees</option>
+    <option value="GUEST_TRAINEES">Guest Trainees</option>
+  </select>
+</div>
+
+  <!-- Show loading spinner when loading is true -->
+  <div *ngIf="loading" class="spinner-container">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+
+<div class="track-progress-container">
+  <div *ngFor="let user of filteredUsers" class="user-progress">
+    <h3>{{ user.firstName }} {{ user.lastName }} ({{ user.role }})</h3>
+    <button type="button" class="specific-user-progress" (click)="goToSpecificUserProgress(user.documentId)">See this user's progress.</button>
+    <div *ngIf="user.enrolledCourses.length === 0">
+      <p>No enrolled courses.</p>
+    </div>
+  
+  </div>
+</div>

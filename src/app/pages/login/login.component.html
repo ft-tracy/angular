@@ -9,13 +9,10 @@
                 <div *ngIf="email.errors?.['required']">Email is required. </div>
                 <div *ngIf="email.errors?.['email']">Invalid email. </div>
             </small>
-    
-    
         </div>
         <div class="field">
             <label for="password">Password </label>
             <input type="password" pInputText formControlName="password" class="w-full" id="password" placeholder="enter password" autocomplete="current-password"/>
-    
         </div>
         <small *ngIf="password.invalid && (password.dirty || password.touched)"
                 class="block p-error">
@@ -23,16 +20,11 @@
     
         </small>
         <p-button type="submit" label="Sign in" styleClass="w-full" [disabled]="loginForm.invalid" ></p-button>
-        <!-- <div class="mt-2">
-            Forgot Password? <a routerLink="/reset-password">Reset</a>
-        </div> -->
         <br>
         <br>
         <div>
             <a (click)="navigateToForgotPassword()"><u>Forgot Password?</u> </a>
           </div>
-    
-    
     </p-card>
     </form>
     

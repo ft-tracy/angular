@@ -93,13 +93,21 @@ $primary-color-light: lighten($primary-color, 15%);
         padding: 0;
 
         li {
-          background-color: $accent-color-light; // Lighter background color
-          color: $accent-color;
+          background-color: $accent-color; // Lighter background color
+          color: $primary-color;
+          font-size: medium;
           padding: 5px 10px;
           border-radius: 3px;
           margin-bottom: 5px;
           cursor: pointer;
           transition: background-color 0.3s;
+
+          .button{
+            background-color: $accent-color;
+            color: $primary-color;
+            border: none;
+            font-size: larger;
+          }
 
           a {
             color: $primary-color;

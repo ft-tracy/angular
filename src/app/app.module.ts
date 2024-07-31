@@ -53,7 +53,16 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { UpdateCourseDataComponent } from './pages/content-manager/course-data-management/update-course-data/update-course-data.component';
 
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ChartModule} from 'primeng/chart';
+import { RatingModule } from 'primeng/rating';
+import { TrackProgressComponent } from './pages/track-progress/track-progress/track-progress.component';
+import { UpdateCourseMaterialsComponent } from './pages/content-manager/update-course-materials/update-course-materials.component';
+import { SpecificUserProgressComponent } from './pages/track-progress/specific-user-progress/specific-user-progress.component';
 
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { BreadcrumbComponent } from './pages/breadcrumb/breadcrumb.component';
+import { ModuleNamePipe } from './pages/content-manager/course-list/module-name.pipe';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +83,11 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     CmDashboardComponent,
     ForgotPasswordComponent,
     UpdateCourseDataComponent,
+    TrackProgressComponent,
+    UpdateCourseMaterialsComponent,
+    SpecificUserProgressComponent,
+    BreadcrumbComponent,
+    ModuleNamePipe,
 
   ],
   imports: [
@@ -103,6 +117,10 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
    ToastModule,
    DialogModule,
    ProgressSpinnerModule,
+   ChartModule,
+   RatingModule,
+
+   BreadcrumbModule,
 
   ],
   providers: [

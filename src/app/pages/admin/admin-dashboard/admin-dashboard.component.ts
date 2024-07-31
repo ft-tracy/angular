@@ -1,63 +1,69 @@
 // admin-dashboard.component.ts
-
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Chart } from 'chart.js';
+import { Component, OnInit } from '@angular/core';
+import { AdminAnalyticsService } from '../../../services/analytics/admin-analytics.service';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss']
 })
-export class AdminDashboardComponent implements OnInit, AfterViewInit {
-  totalEnrolledCourses: number = 100;  // Sample data
-  completedCourses: number = 60;       // Sample data
-  inProgressCourses: number = 30;      // Sample data
-  notStartedCourses: number = 10;      // Sample data
-  quizScores: number[] = [5, 15, 25, 35, 45, 55, 65, 75, 85, 95];  // Sample data
+export class AdminDashboardComponent implements OnInit {
+  userRolesData: any;
+  quizScoreDistributionData: any;
+  courseRatingData: any;
+  courseProgressData: any;
 
-  constructor() {}
+  constructor(private adminAnalyticsService: AdminAnalyticsService) {}
 
-  ngOnInit(): void {}
-
-  ngAfterViewInit(): void {
-    this.initializeChart();
+  ngOnInit(): void {
+    this.loadUserRolesData();
+    this.loadQuizScoreDistributionData();
+    this.loadCourseRatingData();
+    this.loadCourseProgressData();
   }
 
-  getCompletedCoursesPercentage(): number {
-    return (this.completedCourses / this.totalEnrolledCourses) * 100;
+  loadUserRolesData(): void {
+    this.adminAnalyticsService.getUserRoles().subscribe(data => {
+      this.userRolesData = {
+        labels: Object.keys(data),
+        datasets: [
+          {
+            data: Object.values(data),
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF6600']
+          }
+        ]
+      };
+    });
   }
 
-  getInProgressCoursesPercentage(): number {
-    return (this.inProgressCourses / this.totalEnrolledCourses) * 100;
+  loadQuizScoreDistributionData(): void {
+    this.adminAnalyticsService.getQuizScoreDistribution().subscribe(data => {
+      this.quizScoreDistributionData = {
+        labels: Object.keys(data),
+        datasets: [
+          {
+            label: 'Number of Trainees',
+            data: Object.values(data),
+            backgroundColor: ['#36A2EB', '#FFCE56', '#FF6384', '#FF6600']
+          }
+        ]
+      };
+    });
   }
 
-  getNotStartedCoursesPercentage(): number {
-    return (this.notStartedCourses / this.totalEnrolledCourses) * 100;
+  loadCourseRatingData(): void {
+    // Example courseId to fetch the ratings
+    const exampleCourseId = 'example-course-id';
+    this.adminAnalyticsService.getCourseRatings(exampleCourseId).subscribe(data => {
+      this.courseRatingData = data;
+    });
   }
 
-  initializeChart(): void {
-    const ctx = (document.getElementById('quizScoreChart') as HTMLCanvasElement).getContext('2d');
-
-  //   new Chart(ctx, {
-  //     type: 'bar',
-  //     data: {
-  //       labels: ['0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '81-90', '91-100'],
-  //       datasets: [{
-  //         label: 'Number of Trainees',
-  //         data: this.quizScores,
-  //         backgroundColor: $accent-color,
-  //         borderColor: $primary-color,
-  //         borderWidth: 1
-  //       }]
-  //     },
-  //     options: {
-  //       scales: {
-  //         y: {
-  //           beginAtZero: true
-  //         }
-  //       }
-  //     }
-  //   });
+  loadCourseProgressData(): void {
+    // Example userId to fetch the course progress
+    const exampleUserId = 'example-user-id';
+    this.adminAnalyticsService.getCourseProgress(exampleUserId).subscribe(data => {
+      this.courseProgressData = data;
+    });
+  }
 }
-}
-

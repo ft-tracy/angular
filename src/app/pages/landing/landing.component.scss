@@ -1,0 +1,48 @@
+/* landing.component.scss */
+
+.responsive-image {
+    max-width: 100%;
+    width: 100%; /* Ensure the image takes up the full width of its container */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    align-self: center;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    // width: 90%;
+    align-items: center;
+    align-self: center;
+    border-radius: 100 px;
+}
+
+.col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.md\:col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+/* Additional styles to control the image size */
+.img-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-height: 400px; /* Set a maximum height for the image container */
+}
+
+.img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensure the image covers the container without stretching */
+}

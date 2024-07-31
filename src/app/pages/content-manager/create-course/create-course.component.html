@@ -1,5 +1,8 @@
+
 <!-- //create-course.component.html -->
+
 <form [formGroup]="createCourseForm" (ngSubmit)="onSubmit()">
+
   <div class="header">
     <h3>Create Course</h3>
   </div>
@@ -21,7 +24,7 @@
 
   <div class="p-field">
     <label for="CourseDescription">Course Description:</label>
-    <input type="text" id="CourseDescription" pInputText formControlName="CourseDescription" maxlength="500">
+    <textarea  id="CourseDescription" style="width: 100%;" rows="3" formControlName="CourseDescription" maxlength="500" ></textarea>
       <small class="error">Course description cannot exceed 500 characters.</small>
     </div>
 
@@ -31,7 +34,9 @@
     <label for="CourseTags">Course Tags:</label>
     <div *ngFor="let tag of CourseTags.controls; let i = index" class="tag">
       <input type="text" pInputText [formControlName]="i">
-      <span class="remove-icon" (click)="removeTag(i)"><i class="pi pi-times-circle"  style="font-size: 2rem" ></i></span>
+      <span class="remove-icon" (click)="removeTag(i)">
+        <i class="pi pi-times-circle"  style="font-size: 2rem" ></i>
+      </span>
     </div>
     <br>
     <button type="button" pButton label="Add Tag" (click)="addTag('')"></button>
@@ -42,7 +47,9 @@
     <label for="CourseModules">Course Modules:</label>
     <div *ngFor="let module of CourseModules.controls; let i = index" class="module">
       <input type="text" pInputText [formControlName]="i">
-      <span class="remove-icon" (click)="removeModule(i)"><i class="pi pi-times-circle" style="font-size: 2rem"></i></span>
+      <span class="remove-icon" (click)="removeModule(i)">
+        <i class="pi pi-times-circle" style="font-size: 2rem"></i>
+      </span>
     </div>
     <br>
     <button type="button" pButton label="Add Module" (click)="addModule('')"></button>
@@ -64,23 +71,3 @@
 
   <button type="submit" pButton label="Create Course" [disabled]="!createCourseForm.valid" ></button>
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

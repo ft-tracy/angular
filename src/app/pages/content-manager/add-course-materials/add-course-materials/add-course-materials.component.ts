@@ -1,4 +1,4 @@
-//add-course-materials.component.ts
+// add-course-materials.component.ts
 
 import { Component, OnInit, ViewChild, ViewChildren, QueryList, ElementRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl } from '@angular/forms';
@@ -7,6 +7,7 @@ import { FileUpload } from 'primeng/fileupload';
 import { ActivatedRoute } from '@angular/router';
 import { CourseContentService } from '../../../../services/course-content/course-content.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-course-materials',
@@ -36,12 +37,15 @@ export class AddCourseMaterialsComponent implements OnInit, AfterViewInit {
 
   public isVideoAdded: boolean = false;
 
+  public quizQuestions: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private messageService: MessageService,
     private route: ActivatedRoute,
     private courseContentService: CourseContentService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router:Router,
   ) {
     this.contentForm = this.fb.group({
       contentList: this.fb.array([])
@@ -125,20 +129,24 @@ export class AddCourseMaterialsComponent implements OnInit, AfterViewInit {
     this.contentList.removeAt(index);
   }
 
-  addQuiz() {
-    const quizGroup = this.fb.group({
-      type: 'quiz',
-      QuestionText: ['', Validators.required],
-      Choices: this.fb.array([this.createChoice(), this.createChoice()]),
-    });
-    this.contentList.push(quizGroup);
-    this.cd.detectChanges();
-  }
+
+addQuiz() {
+  const quizGroup = this.fb.group({
+    type: 'quiz',
+    QuestionText: ['', Validators.required],
+    Choices: this.fb.array([this.createChoice(), this.createChoice()]),
+    CorrectAnswers: this.fb.array([]) // Initialize correct answers array
+  });
+  this.contentList.push(quizGroup);
+  this.cd.detectChanges();
+}
+
+  
 
   createChoice(): FormGroup {
     return this.fb.group({
-      Choice: ['', Validators.required],
-      isCorrect: [false, Validators.required]
+      ChoiceText: ['', Validators.required],
+      IsCorrect: [false, Validators.required]
     });
   }
 
@@ -147,9 +155,12 @@ export class AddCourseMaterialsComponent implements OnInit, AfterViewInit {
     quiz.push(this.createChoice());
   }
 
+ 
+
   getChoices(quizIndex: number): FormArray {
     return this.contentList.at(quizIndex).get('Choices') as FormArray;
   }
+
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.contentList.controls, event.previousIndex, event.currentIndex);
@@ -163,13 +174,16 @@ export class AddCourseMaterialsComponent implements OnInit, AfterViewInit {
     }, 100);
   }
 
+
+
   removeQuiz(index: number) {
-    this.contentList.removeAt(index);
+    this.quizQuestions.splice(index, 1);
   }
 
+
+
   removeChoice(quizIndex: number, choiceIndex: number) {
-    const quiz = this.contentList.at(quizIndex).get('Choices') as FormArray;
-    quiz.removeAt(choiceIndex);
+    this.quizQuestions[quizIndex].Choices.splice(choiceIndex, 1);
   }
 
   getFormControl(index: number, controlName: string): AbstractControl | null {
@@ -177,7 +191,9 @@ export class AddCourseMaterialsComponent implements OnInit, AfterViewInit {
   }
 
 
-    saveChanges() {
+
+
+  saveChanges() {
     for (let i = 0; i < this.contentList.length; i++) {
       const content = this.contentList.at(i).value;
       if (content.type === 'video') {
@@ -185,10 +201,20 @@ export class AddCourseMaterialsComponent implements OnInit, AfterViewInit {
       } else if (content.type === 'reading') {
         this.uploadReadingContent(this.ModuleName, content.readingTitle, content.readingContent);
       } else if (content.type === 'quiz') {
-        this.uploadQuizContent(this.ModuleName, content.QuestionText, content.Choices);
+        this.quizQuestions.push({
+          QuestionText: content.QuestionText,
+          Choices: content.Choices
+        });
       }
+      this.router.navigate(['/course-list']);
+    }
+  
+    // Save all accumulated quiz questions under a single quiz ID
+    if (this.quizQuestions.length > 0) {
+      this.uploadQuizContent(this.ModuleName, this.quizQuestions);
     }
   }
+  
 
   private uploadVideoContent(ModuleName: string, videoTitle: string, videoDescription: string, VideoFile: File) {
         const videoData = new FormData();
@@ -208,36 +234,26 @@ export class AddCourseMaterialsComponent implements OnInit, AfterViewInit {
     
         this.courseContentService.saveReadingContent(readingData).subscribe();
       }
-    
-     
-    
-      private uploadQuizContent(ModuleName: string, QuestionText: string, Choices: any[]) {
-        const formattedChoices = Choices.map(choice => {
-          return {[ choice.Choice]: choice.isCorrect};
-        })
-    
-    
-        const quizData = new FormData();
-        quizData.append('ModuleName', ModuleName);
-        quizData.append('Questions', JSON.stringify([{
-          questionText: QuestionText,
-          choices: formattedChoices
-        }]));
 
 
- // Log FormData contents
- for (let pair of (quizData as any).entries()) {
-  console.log(pair[0] + ': ' + pair[1]);
+private uploadQuizContent(ModuleName: string, questions: any[]) {
+  const quizData = new FormData();
+  quizData.append('ModuleName', ModuleName);
+  quizData.append('questionsJson', JSON.stringify(questions)); // Send all questions together
+
+  // Log FormData contents for debugging
+  for (let pair of (quizData as any).entries()) {
+    console.log(pair[0] + ': ' + pair[1]);
+  }
+
+  this.courseContentService.saveQuizContent(quizData).subscribe(
+    response => {
+      console.log('Response from backend:', response);
+    },
+    error => {
+      console.error('Error from backend:', error);
+    }
+  );
 }
-
-  this.courseContentService.saveQuizContent(quizData).subscribe(response => {
-    console.log('Response from backend:', response);
-  }, error => {
-    console.error('Error from backend:', error);
-  });
-        console.log('Sending quiz data:', quizData);
-    
-        this.courseContentService.saveQuizContent(quizData).subscribe();
-      }
   
 }

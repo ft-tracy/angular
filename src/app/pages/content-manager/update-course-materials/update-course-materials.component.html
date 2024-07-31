@@ -1,16 +1,21 @@
-<!-- add-course-materials.component.html -->
+ <!-- update-course-materials.component.html -->
 
 <form (ngSubmit)="saveChanges()" class="add-course-materials-form" [formGroup]="contentForm">
+<div class="entire">
   <div class="header">
-    <h3>Add Course Content</h3>
+    <h2>Edit Course Content</h2>
     <span>.................................................................................................................................................................................................................................</span>
     <br>
     <h4>{{ courseTitle }} <br> {{ ModuleName }}</h4>
+
+    <!-- Show loading spinner when loading is true -->
+  <div *ngIf="loading" class="spinner-container">
+    <p-progressSpinner></p-progressSpinner>
   </div>
-  <div class="button-group">
-    <button type="button" class="btn" (click)="addVideo()" [disabled]="isVideoAdded">Add Video</button>
-    <button type="button" class="btn" (click)="addReadingContent()">Add Reading Content</button>
-    <button type="button" class="btn" (click)="addQuiz()">Add Question</button>
+
+    <!-- <div *ngIf="contentList.length === 0">
+    <h3>Add content to this module first so as to edit it.</h3>
+  </div> -->
   </div>
   <div class="content-container" formGroupName="contentList" #contentContainer>
     <div cdkDropList (cdkDropListDropped)="drop($event)">
@@ -21,12 +26,12 @@
           <input type="text" formControlName="videoTitle" style="width: 100%;">
           <br><br>
           <label for="videoDescription">Video Description:</label>
-          <textarea class="text-area-vid-desc" style="width: 100%" formControlName="videoDescription" rows="3"></textarea>
+          <textarea class="text-area" style="width: 100%" formControlName="videoDescription" rows="3"></textarea>
           <br><br>
           <label for="video">Video Upload:</label>
-          <p-fileUpload name="VideoFile" chooseIcon="pi pi-upload" chooseLabel="Upload Video" mode="basic" accept="video/*" maxFileSize="100000000" (onSelect)="onVideoSelect($event, i)" (onRemove)="onVideoRemove(i)" #videoUpload styleClass="custom-upload-button"></p-fileUpload>
-          <div *ngIf="videoPreview">
-            <video [src]="videoPreview" controls width="100%"></video>
+          <p-fileUpload name="VideoFile" chooseIcon="pi pi-upload" chooseLabel="Upload Different Video" mode="basic" accept="video/*" maxFileSize="100000000" (onSelect)="onVideoSelect($event, i)" (onRemove)="onVideoRemove(i)" #videoUpload styleClass="custom-upload-button"></p-fileUpload>
+          <div *ngIf="content.get('videoUrl')?.value">
+            <video [src]="content.get('videoUrl')?.value" controls width="100%"></video>
             <br>
             <button type="button" class="remove-video" (click)="removeVideo(i)">Remove Video</button>
           </div>
@@ -47,29 +52,34 @@
         </div>
 
         <div *ngIf="content.get('type')?.value === 'quiz'" class="border-box">
-          <label for="QuestionText">Question:</label>
-          <textarea formControlName="QuestionText"   style="width: 100%;" rows="3"></textarea>
-          <br>
-          <div formArrayName="Choices">
-            <div *ngFor="let choice of getChoices(i).controls; let j = index" [formGroupName]="j">
+          <div formArrayName="questions">
+            <div *ngFor="let question of getQuestions(i).controls; let qIndex = index" [formGroupName]="qIndex">
+              <label for="questionText">Question:</label>
+              <textarea formControlName="questionText" style="width: 100%;" rows="3"></textarea>
               <br>
-              <label for="choice">Choice {{ j + 1 }}:</label>
-              <textarea formControlName="ChoiceText" style="width: 70%;" rows="1"></textarea>
-              <input type="radio" formControlName="IsCorrect" [value]="true" /> Correct
-              <i class="pi pi-times-circle" (click)="removeChoice(i, j)" style="cursor: pointer; color: red;" style="font-size: 2rem"></i>
+              <div formArrayName="choices">
+                <div *ngFor="let choice of getChoices(i, qIndex).controls; let cIndex = index" [formGroupName]="cIndex">
+                  <br>
+                  <label for="choice">Choice {{ cIndex + 1 }}:</label>
+                  <textarea formControlName="Choice" style="width: 70%;" rows="1"></textarea>
+                  <input type="checkbox" formControlName="isCorrect" /> Correct
+                  <i class="pi pi-times-circle" (click)="removeChoice(i, qIndex, cIndex)" style="cursor: pointer; color: red;" style="font-size: 2rem"></i>
+                </div>
+              </div>
+              <br>
+              <button type="button" (click)="addQuizChoice(i, qIndex)">Add Choice</button>
+              <br>
+              <br>
             </div>
           </div>
-          <br>
-          <button type="button" (click)="addQuizChoice(i)">Add Choice</button>
-          <br>
           <br>
           <button type="button" class="remove-quiz" (click)="removeQuiz(i)">Remove Question</button>
           <br>
         </div>
 
-        
       </div>
     </div>
   </div>
   <button type="submit" class="save-button">Save Changes</button>
+</div>
 </form>

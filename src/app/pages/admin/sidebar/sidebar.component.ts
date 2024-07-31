@@ -35,6 +35,10 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/course-list']);
   }
 
+  navigateToTrackProgress() : void {
+    this.router.navigate(['/track-progress']);
+  }
+
   showSubmenu(): void {
     console.log('showSubmenu() called');
     this.submenuVisible = true;

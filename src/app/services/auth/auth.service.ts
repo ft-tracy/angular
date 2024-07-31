@@ -10,10 +10,7 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = 'https://9a64-105-163-0-234.ngrok-free.app'; 
-  private resetPasswordUrl = 'https://9a64-105-163-0-234.ngrok-free.app';
-  private sendOtpUrl = 'https://9a64-105-163-0-234.ngrok-free.app';
-  private verifyOtpUrl = 'https://9a64-105-163-0-234.ngrok-free.app';
+  private baseUrl = 'https://orientproservice-1.onrender.com'; 
   
   private role: string | null = null;
   
@@ -21,18 +18,18 @@ export class AuthService {
 
   login(email: string, password: string, url: string): Observable<any> {
     const headers = new HttpHeaders({"ngrok-skip-browser-warning": ""});
-    return this.http.post<any>(this.loginUrl + url, { email, password }, { headers: headers })
+    return this.http.post<any>(this.baseUrl + url, { email, password }, { headers: headers })
       .pipe(
         tap(response => {
           if (response) {
             if (response.token) {
-              localStorage.setItem('token', response.token);
+              sessionStorage.setItem('token', response.token);
             }
             if (response.isFirstLogin !== undefined) {
-              localStorage.setItem('isFirstLogin', response.isFirstLogin.toString());
+              sessionStorage.setItem('isFirstLogin', response.isFirstLogin.toString());
             }
             if (response.role) {
-              localStorage.setItem('role', response.role.toString());
+              sessionStorage.setItem('role', response.role.toString());
               this.role = response.role;
             }
           }
@@ -45,15 +42,15 @@ export class AuthService {
   }
 
   isFirstLogin(): boolean {
-    return localStorage.getItem('isFirstLogin') === 'true';
+    return sessionStorage.getItem('isFirstLogin') === 'true';
   }
 
   resetPassword(email: string, newPassword: string, confirmPassword: string, endpoint: string): Observable<any> {
     const headers = new HttpHeaders({"ngrok-skip-browser-warning": ""});
-    return this.http.post<any>(this.resetPasswordUrl + endpoint, { email, newPassword, confirmPassword }, { headers: headers }).pipe(
+    return this.http.post<any>(this.baseUrl + endpoint, { email, newPassword, confirmPassword }, { headers: headers }).pipe(
       tap(response => {
         if (response && response.token) {
-          localStorage.setItem('token', response.token);
+          sessionStorage.setItem('token', response.token);
           this.role = response.role;
         }
       }),
@@ -65,15 +62,15 @@ export class AuthService {
   }
 
   sendOTP(email: string): Observable<any> {
-    return this.http.post(`${this.sendOtpUrl}/api/Account/SendOTP`, { email });
+    return this.http.post(`${this.baseUrl}/api/Account/SendOTP`, { email });
   }
 
   verifyOTP(email: string, otp: string): Observable<any> {
-    return this.http.post(`${this.verifyOtpUrl}/api/Account/VerifyOTP`, { email, otp });
+    return this.http.post(`${this.baseUrl}/api/Account/VerifyOTP`, { email, otp });
   }
 
   getUserRole(): string | null {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     if (token) {
       const payload = JSON.parse(atob(token.split('.')[1]));
       return payload.role;
@@ -82,8 +79,8 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('isFirstLogin');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('isFirstLogin');
     this.role = null;
     this.router.navigate(['/landing']);
   }

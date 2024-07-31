@@ -1,28 +1,35 @@
 <!-- admin-dashboard.component.html -->
 <div class="dashboard-container">
-  <app-sidebar></app-sidebar>
+  <div class="sidebar">
+    <app-sidebar></app-sidebar>
+    <app-breadcrumb></app-breadcrumb>
+  </div>
+
   <div class="content">
     <div class="analytics-cards">
-      <div class="card">
-        <h2>Completed Courses</h2>
-        <p>{{completedCourses}} / {{totalEnrolledCourses}}</p>
-        <p>{{getCompletedCoursesPercentage() | number:'1.0-2'}}%</p>
+      <div class="card" *ngIf="userRolesData">
+        <h2>User Roles Distribution</h2>
+        <!-- <p-chart type="pie" [data]="userRolesData" [options]="chartOptions"></p-chart> -->
       </div>
-      <div class="card">
-        <h2>In Progress Courses</h2>
-        <p>{{inProgressCourses}} / {{totalEnrolledCourses}}</p>
-        <p>{{getInProgressCoursesPercentage() | number:'1.0-2'}}%</p>
+
+      <div class="card" *ngIf="quizScoreDistributionData">
+        <h2>Quiz Score Distribution</h2>
+        <!-- <p-chart type="bar" [data]="quizScoreDistributionData" [options]="chartOptions"></p-chart> -->
       </div>
-      <div class="card">
-        <h2>Not Started Courses</h2>
-        <p>{{notStartedCourses}} / {{totalEnrolledCourses}}</p>
-        <p>{{getNotStartedCoursesPercentage() | number:'1.0-2'}}%</p>
+
+      <div class="card" *ngIf="courseRatingData">
+        <h2>Course Ratings</h2>
+        <div *ngFor="let rating of courseRatingData">
+          <p>{{ rating.courseId }}: {{ rating.averageRating }} / 5</p>
+        </div>
       </div>
-    </div>
-    <div class="chart-container">
-      <h2>Quiz Score Ranges</h2>
-      <canvas id="quizScoreChart"></canvas>
+
+      <div class="card" *ngIf="courseProgressData">
+        <h2>Course Progress</h2>
+        <div *ngFor="let progress of courseProgressData">
+          <p>{{ progress.FirstName }} {{ progress.LastName }}: {{ progress.Progress }}%</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-

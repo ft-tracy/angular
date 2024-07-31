@@ -41,7 +41,7 @@ export class LoginComponent {
     this.authService.login(email, password, "/api/Account/Login").subscribe(response => {
         if (response) {
           if(this.authService.isFirstLogin()){
-            localStorage.setItem("isFirstLogin", "true")
+            sessionStorage.setItem("isFirstLogin", "true")
             this.router.navigate(['/reset-password']);
           } else {
             const role = response.role;

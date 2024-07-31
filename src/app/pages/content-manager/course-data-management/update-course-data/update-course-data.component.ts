@@ -1,4 +1,4 @@
-//  update-coure-data.component.ts
+//  update-course-data.component.ts
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
@@ -16,8 +16,6 @@ export class UpdateCourseDataComponent implements OnInit {
   courseImagePreview: string | ArrayBuffer | null = null;
   id!: string;
 
-
-
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -32,19 +30,15 @@ export class UpdateCourseDataComponent implements OnInit {
       courseTags: this.fb.array([]),
       courseModules: this.fb.array([]),
       exclusiveToCompanyEmployees: [false, Validators.required]
-      
     });
 
- 
-    
-    
   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.id = params['id'];
       const courseTags = params['courseTags'] ? params['courseTags'].split(',') : [];
-      const courseModules = params['courseModules'] ? params['courseModules'].split(',') : [];
+      const courseModules = params['courseModules'] ? JSON.parse(params['courseModules']) : [];
 
       this.updateCourseForm.patchValue({
         id: params['id'],
@@ -54,26 +48,28 @@ export class UpdateCourseDataComponent implements OnInit {
         exclusiveToCompanyEmployees: params['exclusiveToCompanyEmployees'] === 'true',
       });
 
-
+      // Set form array values
       this.setFormArrayValues(courseTags, this.courseTags, 'tag');
-      this.setFormArrayValues(courseModules, this.courseModules, 'module');
+      this.setFormArrayValues(courseModules, this.courseModules, 'moduleName', 'moduleId', 'moduleName');
 
       this.courseImagePreview = params['courseImage']; // Set preview image
-    });      
-
-
+    });
   }
-  setFormArrayValues(values: any[], formArray: FormArray, controlName: string) {
+
+  setFormArrayValues(values: any[], formArray: FormArray, controlName: string, idName?: string, nameName?: string) {
+    formArray.clear();
+
     values.forEach(value => {
       const group = this.fb.group({
-        moduleId: [value.moduleId, Validators.required], // Assuming value contains moduleId
-        module: [value.moduleName, Validators.required]
+        [controlName]: [nameName ? value[nameName] : value, Validators.required]
       });
+      if (idName) {
+        group.addControl(idName, this.fb.control(value[idName]));
+      }
       formArray.push(group);
     });
   }
   
-
 
   get courseTags(): FormArray {
     return this.updateCourseForm.get('courseTags') as FormArray;
@@ -97,31 +93,72 @@ export class UpdateCourseDataComponent implements OnInit {
   }
 
   
+  // addModule(module: any): void {
+  //   const group = this.fb.group({
+  //     moduleName: [module, Validators.required]
+  //   });
+  //   this.courseModules.push(group);
+  // }
 
-  addModule(module: any): void {
+  addModule(moduleName: string): void {
     const group = this.fb.group({
-      module: [module, Validators.required]
+      moduleName: [moduleName, Validators.required],
+      moduleId: ['']
     });
     this.courseModules.push(group);
   }
 
+  
+
+  
+
   removeModule(index: number): void {
     this.courseModules.removeAt(index);
   }
-  editModule(index: number, moduleName: string): void {
-    const moduleId = this.courseModules.at(index).get('moduleId')?.value; // Assuming module IDs are stored in the form
-    const updatedModule = { moduleName, moduleId };
-    this.courseDataService.editModule(updatedModule).subscribe(
-      (response: any) => {
-        console.log('Module updated successfully', response);
-        this.courseModules.at(index).patchValue({ module: moduleName });
-      },
-      (error: any) => {
-        console.error('Error updating module: ', error);
-      }
-    );
-  }
+  // editModule(index: number, moduleName: string): void {
+  //   const moduleId = this.courseModules.at(index).get('moduleId')?.value; // Assuming module IDs are stored in the form
+  //   const updatedModule = {  moduleId, moduleName };
+    
+  //   this.courseDataService.editModule(updatedModule).subscribe(
+  //     (response: any) => {
+  //       console.log('Module updated successfully', response);
+  //       this.courseModules.at(index).patchValue({  moduleName });
+  //     },
+  //     (error: any) => {
+  //       console.error('Error updating module: ', error);
+  //     }
+  //   );
+  // }
   
+  editModule(index: number, moduleName: string): void {
+    const moduleId = this.courseModules.at(index).get('moduleId')?.value;
+    const updatedModule = { moduleId, title: moduleName };
+
+    if (moduleId) {
+      // Update existing module
+      this.courseDataService.editModule(updatedModule).subscribe(
+        (response: any) => {
+          console.log('Module updated successfully', response);
+          this.courseModules.at(index).patchValue({ moduleName });
+        },
+        (error: any) => {
+          console.error('Error updating module: ', error);
+        }
+      );
+    } else {
+      console.log('addModule () called');
+      // Add new module
+      this.courseDataService.addModule({ courseId: this.id, title: moduleName }).subscribe(
+        (response: any) => {
+          console.log('Module added successfully', response);
+          this.courseModules.at(index).patchValue({ moduleId: response.moduleId });
+        },
+        (error: any) => {
+          console.error('Error adding module: ', error);
+        }
+      );
+    }
+  }
   
   
 

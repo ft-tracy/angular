@@ -1,0 +1,17 @@
+// Define color variables
+$primary-color: #001f3f; // Navy Blue
+$accent-color: #ff6600; // Burnt Orange
+$background-color: #a7a7bb;
+$input-border-color: #ccc;
+$input-focus-border-color: $primary-color;
+$label-color: #001f3f;
+$text-color: #ffffff;
+$primary-color-light: lighten($primary-color, 15%);
+
+$accent-color-light: lighten($accent-color, 15%);
+
+
+.label{
+    font-weight: 300;
+    font-size: larger;
+}

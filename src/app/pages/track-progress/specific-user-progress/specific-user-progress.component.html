@@ -1,0 +1,32 @@
+<!-- specific-user-progress.component.html -->
+
+<div *ngIf="userProgress" class="user-progress-container">
+  <h2>User Progress for {{ userProgress.firstName }} {{ userProgress.lastName }}</h2>
+    <!-- Show loading spinner when loading is true -->
+    <div *ngIf="loading" class="spinner-container">
+      <p-progressSpinner></p-progressSpinner>
+    </div>
+  <div *ngFor="let course of userProgress.courseProgress; let i = index" class="course-progress">
+    
+    <h3>{{ i + 1 }}. {{ course.courseName }}</h3>
+    <div>
+      Progress: {{ course.progress }}%
+      <div class="progress-bar-container">
+        <div class="progress-bar" [style.width.%]="course.progress"></div>
+      </div>
+    </div>
+    <div *ngIf="course.isCompleted">
+      <h4>Completed Contents:</h4>
+      <div *ngFor="let module of getCompletedModules(course.completedContents)" class="module-container">
+        <h5>{{ module.moduleName }}</h5>
+        <ul>
+          <li *ngFor="let content of module.contents">{{ content }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  

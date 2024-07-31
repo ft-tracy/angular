@@ -34,7 +34,10 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/assets/images/logo.png",
-              "src/assets"
+              "src/assets",
+              "src/favicon.ico",
+              "src/fonts"
+
             ],
             "styles": [
               "src/styles.scss"

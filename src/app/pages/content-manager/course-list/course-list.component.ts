@@ -16,12 +16,13 @@ import { ConfirmPopup } from 'primeng/confirmpopup';
   providers:  [ConfirmationService, MessageService],
 })
 export class CourseListComponent implements OnInit {
+
   courses: any[] = []; // Define and initialize the courses property
-  // modules: any [] =[];
   displayDeleteCourseDialog : boolean = false;
   deleteCourse: any;
   confirmDeleteCourseForm!: FormGroup;
 
+  modules: any;
   deleteModule: any;
   displayDeleteModuleDialog: boolean = false;
   confirmDeleteModuleForm! : FormGroup;
@@ -29,12 +30,7 @@ export class CourseListComponent implements OnInit {
   loading: boolean = true;
 
   @ViewChild('confirmPopup') confirmPopup!: ConfirmPopup;
-modules: any;
 
-  // private readonly COURSE_TITLE = 'CourseTitle';
-  // private readonly COURSE_DESCRIPTION = 'CourseDescription';
-  // public readonly COURSE_TAGS = 'CourseTags';
-  // public readonly COURSE_MODULES = 'CourseModules';
 
   constructor (
     private courseDataService: CourseDataService, 
@@ -57,26 +53,12 @@ modules: any;
     this.loadCourses();
   }
 
-  // loadCourses(): void {
-  //   this.loading = true;
-  //   this.courseDataService.getCourses().subscribe(
-  //     (data) => {
-  //       this.courses = data; // Assign the data returned from the getCourses() method to courses property
-  //       console.log(data);
-  //       this.loading = false;
-  //     },
-  //     (error) => {
-  //       console.error('Error loading courses: ', error); // Log detailed error information
-  //       this.loading = false;
-  //     }
-  //   );
-  // }
 
   loadCourses(): void {
     this.loading = true;
     this.courseDataService.getCourses().subscribe(
       (data) => {
-        // Assuming the response structure is correct
+
         this.courses = data.map(course => ({
           ...course,
           modules: course.modules // ensure modules is an array with module objects
@@ -103,8 +85,11 @@ modules: any;
         courseImage: course.courseImageUrl,
         courseTitle: course.courseTitle,
         courseDescription: course.courseDescription,
-        courseTags: course.courseTags.join(','), // Join array to string for query parameter
-        courseModules: course.courseModules.join(','), // Join array to string for query parameter
+        courseTags: course.courseTags.join(','), // Ensure tags are joined as a string
+        courseModules: JSON.stringify(course.modules.map((module: any) => ({
+          moduleId: module.moduleId,
+          moduleName: module.moduleName
+        }))),
         exclusiveToCompanyEmployees: course.exclusiveToCompanyEmployees
       }
     });
@@ -144,6 +129,16 @@ modules: any;
     });
   }
 
+  goToUpdateCourseMaterials(courseTitle: string, module: string, moduleId: string): void {
+    this.router.navigate(['/update-content'], {
+      queryParams: {
+        courseTitle: courseTitle,
+        module: module,
+        moduleId: moduleId,
+      }
+    });
+  }
+
 
   confirmDeleteModule(module: any): void {
     this.deleteModule = module;
@@ -151,27 +146,7 @@ modules: any;
     this.displayDeleteModuleDialog = true;
   }
 
-  // deleteModuleConfirmed(): void {
-  //   if (this.confirmDeleteModuleForm.get('confirmDeleteText')?.value === this.deleteModule.name) {
-  //     this.courseDataService.deleteModule(this.deleteModule.id).subscribe(
-  //       (response: any) => {
-  //         console.log('Module deleted successfully', response);
-  //         // Find the module index in the FormArray and remove it
-  //         const courseIndex = this.courses.findIndex(course => course.courseModules.some((mod: any) => mod.id === this.deleteModule.id));
-  //         if (courseIndex > -1) {
-  //           const moduleIndex = this.courses[courseIndex].courseModules.findIndex((mod: any) => mod.id === this.deleteModule.id);
-  //           if (moduleIndex > -1) {
-  //             this.courses[courseIndex].courseModules.splice(moduleIndex, 1);
-  //           }
-  //         }
-  //         this.displayDeleteModuleDialog = false;
-  //       },
-  //       (error: any) => {
-  //         console.error('Error deleting module: ', error);
-  //       }
-  //     );
-  //   }
-  // }
+
 
   deleteModuleConfirmed(): void {
     if (this.deleteModule) {
