@@ -1,19 +1,16 @@
-<!-- update-course.component.html -->
-
 <div class="sidebar-container">
   <app-cm-sidebar></app-cm-sidebar>
 </div>
 <div class="update-course-container">
   <h2>Edit Course Data</h2>
   <form [formGroup]="updateCourseForm" (ngSubmit)="saveChanges()">
-    
     <!-- Course Image Preview and Upload -->
     <div class="form-group">
       <label for="courseImage">Course Image</label>
       <div class="course-image-preview">
         <img [src]="courseImagePreview" alt="Course Image" *ngIf="courseImagePreview">
       </div>
-      <input type="file" aria-label="Change Course Image" (change)="onImageChange($event)"  />
+      <input type="file" aria-label="Change Course Image" (change)="onImageChange($event)" />
     </div>
 
     <!-- Course Title -->
@@ -28,31 +25,30 @@
       <textarea id="courseDescription" formControlName="courseDescription"></textarea>
     </div>
 
-      <!-- Course Tags -->
-       <div class="form-group">
-        <label for="courseTags">Edit Course Tags:</label>
-        <div formArrayName="courseTags">
-          <div *ngFor="let tag of courseTags.controls; let i = index" [formGroupName]="i">
-            <input type="text" formControlName="tag" />
-            <button type="button" (click)="removeTag(i)">Remove</button>
-          </div>
+    <!-- Course Tags -->
+    <div class="form-group">
+      <label for="courseTags">Edit Course Tags:</label>
+      <div formArrayName="courseTags">
+        <div *ngFor="let tag of courseTags.controls; let i = index" [formGroupName]="i">
+          <input type="text" formControlName="tag" />
+          <button type="button" (click)="removeTag(i)">Remove</button>
         </div>
-        <label for="courseTags">Add Course Tags:</label>
-        <button type="button" (click)="addTag('')">Add Tag</button>
       </div>
+      <label for="courseTags">Add Course Tags:</label>
+      <button type="button" (click)="addTag('')">Add Tag</button>
+    </div>
 
-
-          <!-- Course Modules -->
-          <div class="form-group">
-            <label for="courseModules">Edit Course Modules:</label>
-            <div formArrayName="courseModules">
-              <div *ngFor="let module of courseModules.controls; let i = index" [formGroupName]="i">
-                <input type="text" formControlName="moduleName" />
-                <button type="button" (click)="editModule(i, module.value.moduleName)">Save</button>
-              </div>
-            </div>
-            <button type="button" (click)="addModule('')">Add Module</button>
-          </div> 
+    <!-- Course Modules -->
+    <div class="form-group">
+      <label for="courseModules">Edit Course Modules:</label>
+      <div formArrayName="courseModules">
+        <div *ngFor="let module of courseModules.controls; let i = index" [formGroupName]="i">
+          <input type="text" formControlName="moduleName" />
+          <button type="button" (click)="editModule(i, module.value.moduleName)">Save</button>
+        </div>
+      </div>
+      <button type="button" (click)="addModule('')">Add Module</button>
+    </div>
 
     <!-- Exclusive to Company Employees -->
     <div class="form-group">
@@ -63,6 +59,3 @@
     <button type="submit">Submit Changes</button>
   </form>
 </div>
-
-
-

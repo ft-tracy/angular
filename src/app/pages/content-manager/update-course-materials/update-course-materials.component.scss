@@ -9,9 +9,27 @@ $label-color: $primary-color;
 $text-color: #ffffff;
 $error-color: darken($background-color, 30%);
 
-
+// Common mixin for buttons
+@mixin button-style($bg-color, $text-color: $primary-color) {
+  background: $bg-color;
+  color: $text-color;
+  font-size: medium;
+  font-weight: 350;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  border-radius: 4px;
+  width: 100%;
+}
 
 .add-course-materials-form {
+  max-width: calc(100% - 0px);
+  display: flex;
+  flex-direction: column;
+  margin-left: 0px; // Offset for sidebar width
+  right: 0px;
+
   .header {
     text-align: center;
     margin-bottom: 20px;
@@ -38,6 +56,7 @@ $error-color: darken($background-color, 30%);
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    background-color: lighten($background-color, 10%);
   }
 
   .border-box {
@@ -45,6 +64,7 @@ $error-color: darken($background-color, 30%);
     border-radius: 4px;
     padding: 10px;
     margin-bottom: 10px;
+    background-color: #fff;
   }
 
   .text-area {
@@ -55,26 +75,12 @@ $error-color: darken($background-color, 30%);
   .remove-video,
   .remove-reading,
   .remove-quiz {
-    background: #ff4c4c;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+    @include button-style(#ff4c4c, #fff);
     margin-top: 10px;
-    border-radius: 4px;
   }
 
   .save-button {
-    background: lighten($accent-color, 10%);
-    color: $primary-color;
-    font-size: medium;
-    font-weight: 350;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-top: 20px;
-    border-radius: 4px;
-    width: 100%;
+    @include button-style(lighten($accent-color, 10%));
   }
 
   .video-progress-bar {
@@ -84,7 +90,7 @@ $error-color: darken($background-color, 30%);
   .custom-upload-button {
     display: inline-block;
     padding: 10px;
-    background: #007bff;
+    background: $accent-color;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -93,8 +99,89 @@ $error-color: darken($background-color, 30%);
   }
 }
 
-.entire{
+.entire {
   background-color: lighten($background-color, 10%);
-  border-radius: 10 px;
+  border-radius: 10px;
   padding: 20px;
+  margin-left: 250px; // Offset for sidebar width
+}
+
+// Sidebar styling
+.sidebar-container {
+  width: 250px;
+  height: 100vh;
+  background-color: $primary-color;
+  color: $text-color;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    &__logo {
+      margin-right: 10px;
+    }
+
+    &__brand {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: $text-color;
+    }
+  }
+
+  &__list {
+    flex-grow: 1;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      padding: 15px 0;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      border-radius: 10px;
+
+      &:hover {
+        background-color: darken($primary-color, 5%);
+        transition: background-color 0.3s;
+      }
+
+      i {
+        margin-right: 10px;
+        font-size: 1.2em;
+      }
+
+      &__title {
+        font-size: 1em;
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+
+    &__logo {
+      margin-right: 10px;
+    }
+
+    &__data {
+      &__title {
+        font-size: 1em;
+        font-weight: bold;
+      }
+
+      &__subtitle {
+        font-size: 0.8em;
+        color: lighten($text-color, 20%);
+      }
+    }
+  }
 }

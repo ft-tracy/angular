@@ -43,9 +43,8 @@ export class CourseListComponent implements OnInit {
       confirmDeleteCourseText: ['', Validators.required]
     });
 
-       
     this.confirmDeleteModuleForm = this.fb.group({
-      confirmDeleteText: ['', Validators.required]
+      confirmDeleteModuleText: ['', Validators.required]
     });
   }
 
@@ -108,7 +107,7 @@ export class CourseListComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Course Deleted', detail: 'Course has been successfully deleted.' });
         this.loadCourses();
         this.displayDeleteCourseDialog = false;
-      }, error => {
+      }, _error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Course could not be deleted.'});
       });
     }
@@ -149,13 +148,19 @@ export class CourseListComponent implements OnInit {
 
 
   deleteModuleConfirmed(): void {
-    if (this.deleteModule) {
-      this.courseDataService.deleteModule(this.deleteModule.moduleId).subscribe(() => {
-        this.loadCourses(); // Refresh the modules list
-        this.displayDeleteModuleDialog = false;
-      }, error => {
-        console.error('Error deleting module: ', error);
-      });
+    if (
+      this.confirmDeleteModuleForm.get('confirmDeleteModuleText')?.value ===
+      this.deleteModule?.moduleName
+    ) {
+      this.courseDataService.deleteModule(this.deleteModule.moduleId).subscribe(
+        () => {
+          this.loadCourses();
+          this.displayDeleteModuleDialog = false;
+        },
+        (error) => {
+          console.error('Error deleting module: ', error);
+        }
+      );
     }
   }
 

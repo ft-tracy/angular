@@ -61,7 +61,6 @@ import { SpecificUserProgressComponent } from './pages/track-progress/specific-u
 
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { BreadcrumbComponent } from './pages/breadcrumb/breadcrumb.component';
-import { ModuleNamePipe } from './pages/content-manager/course-list/module-name.pipe';
  
 @NgModule({
   declarations: [
@@ -87,7 +86,6 @@ import { ModuleNamePipe } from './pages/content-manager/course-list/module-name.
     UpdateCourseMaterialsComponent,
     SpecificUserProgressComponent,
     BreadcrumbComponent,
-    ModuleNamePipe,
 
   ],
   imports: [

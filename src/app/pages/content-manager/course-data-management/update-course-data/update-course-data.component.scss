@@ -1,126 +1,137 @@
-// // update-course-data.component.scss
+// Define color variables
+$primary-color: #001f3f; // Navy Blue
+$accent-color: #ff6600; // Burnt Orange
+$background-color: #a7a7bb;
+$input-border-color: #ccc;
+$input-focus-border-color: $primary-color;
+$label-color: #001f3f;
+$text-color: #ffffff;
+$accent-color-light: lighten($accent-color, 15%);
+$primary-color-light: lighten($primary-color, 15%);
 
-// // Define color variables
-// $primary-color: #001f3f; // Navy Blue
-// $accent-color: #ff6600; // Burnt Orange
-// $background-color: #a7a7bb;
-// $input-border-color: #ccc;
-// $input-focus-border-color: $primary-color;
-// $label-color: #001f3f;
-// $text-color: #ffffff;
-// $accent-color-light: lighten($accent-color, 15%);
-// $primary-color-light: lighten($primary-color, 15%);
+.update-course-container {
+  max-width: calc(100% - 250px); // Adjusted for sidebar
+  margin: 0 auto;
+  padding: 20px;
+  background-color: $background-color;
+  border: 1px solid $input-border-color;
+  border-radius: 10px;
+  overflow-y: auto;
+  height: calc(100vh - 0px); // Full height minus some padding
+  position: absolute;
+  left: 250px; // Sidebar width
+  top: 0;
+  right: 0px;
+  bottom: 0px;
 
-// .update-course-container {
-//   width: 800px;
-//   margin: 0 auto;
-//   padding: 20px;
-//   background-color: $background-color;
-//   border: 1px solid $input-border-color;
-//   border-radius: 5px;
+  h2 {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    border-radius: 7px;
+    background-color: $primary-color;
+  }
 
-//   h2 {
-//     text-align: center;
-//     color: $primary-color;
-//   }
+  form {
+    .form-group {
+      margin-bottom: 20px;
 
-//   form {
-//     .form-group {
-//       margin-bottom: 20px;
+      label {
+        display: block;
+        color: $label-color;
+        margin-bottom: 5px;
+        font-size: medium;
+        font-weight: 700;
+      }
 
-//       label {
-//         display: block;
-//         color: $label-color;
-//         margin-bottom: 5px;
-//       }
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid $input-border-color;
+        border-radius: 3px;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
 
-//       input,
-//       textarea {
-//         width: 100%;
-//         padding: 10px;
-//         border: 1px solid $input-border-color;
-//         border-radius: 3px;
-//         box-sizing: border-box;
-//         transition: border-color 0.3s;
+        &:focus {
+          border-color: $input-focus-border-color;
+          outline: none;
+        }
+      }
 
-//         &:focus {
-//           border-color: $input-focus-border-color;
-//           outline: none;
-//         }
-//       }
+      .course-image-preview {
+        margin-top: 10px;
 
-//       .course-image-preview {
-//         margin-top: 10px;
+        img {
+          max-width: 100%;
+          border-radius: 5px;
+          border: 2px solid $accent-color;
+        }
+      }
 
-//         img {
-//           max-width: 100%;
-//           border-radius: 5px;
-//         }
-//       }
+      button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: $accent-color;
+        color: $text-color;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.3s;
 
-//       button {
-//         margin-top: 10px;
-//         padding: 10px 20px;
-//         background-color: $accent-color;
-//         color: $text-color;
-//         border: none;
-//         border-radius: 3px;
-//         cursor: pointer;
-//         transition: background-color 0.3s;
+        &:hover {
+          background-color: darken($accent-color, 10%);
+        }
+      }
+    }
 
-//         &:hover {
-//           background-color: darken($accent-color, 10%);
-//         }
-//       }
-//     }
+    .form-group button[type="button"] {
+      background-color: $primary-color;
+      color: $text-color;
 
-//     .form-group button[type="button"] {
-//       background-color: $primary-color;
-//       color: $text-color;
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
 
-//       &:hover {
-//         background-color: darken($primary-color, 10%);
-//       }
-//     }
+    .form-group[formArrayName="courseTags"],
+    .form-group[formArrayName="courseModules"] {
+      div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
 
-//     .form-group[formArrayName="courseTags"],
-//     .form-group[formArrayName="courseModules"] {
-//       div {
-//         display: flex;
-//         align-items: center;
-//         margin-bottom: 10px;
+        input {
+          flex: 1;
+          margin-right: 10px;
+          color: #001f3f;
+        }
 
-//         input {
-//           flex: 1;
-//           margin-right: 10px;
-//           color: #001f3f;
-//         }
+        button {
+          flex-shrink: 0;
+          background-color: $accent-color;
+          color: $text-color;
 
-//         button {
-//           flex-shrink: 0;
-//           background-color: $accent-color;
-//           color: $text-color;
+          &:hover {
+            background-color: darken($accent-color, 10%);
+          }
+        }
+      }
+    }
 
-//           &:hover {
-//             background-color: darken($accent-color, 10%);
-//           }
-//         }
-//       }
-//     }
+    button[type="submit"] {
+      width: 100%;
+      padding: 15px;
+      background-color: $primary-color;
+      color: $text-color;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
 
-//     button[type="submit"] {
-//       width: 100%;
-//       padding: 15px;
-//       background-color: $primary-color;
-//       color: $text-color;
-//       border: none;
-//       border-radius: 3px;
-//       cursor: pointer;
-//       transition: background-color 0.3s;
-
-//       &:hover {
-//         background-color: darken($primary-color, 10%);
-//       }
-//     }
-//   }
-// }
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+}

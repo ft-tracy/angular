@@ -294,7 +294,7 @@ export class UpdateCourseMaterialsComponent implements OnInit, AfterViewInit {
         this.updateQuizContent(content);
       }
       // this.ngOnInit();
-      // this.router.navigate(['/course-list']);
+      this.router.navigate(['/course-list']);
     });
   }
 
